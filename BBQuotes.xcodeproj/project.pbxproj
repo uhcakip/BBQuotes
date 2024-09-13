@@ -11,6 +11,7 @@
 		E81506472C94144F00B7F8F4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81506462C94144F00B7F8F4 /* ContentView.swift */; };
 		E81506492C94145000B7F8F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E81506482C94145000B7F8F4 /* Assets.xcassets */; };
 		E815064C2C94145000B7F8F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E815064B2C94145000B7F8F4 /* Preview Assets.xcassets */; };
+		E81506542C94156900B7F8F4 /* Inject in Frameworks */ = {isa = PBXBuildFile; productRef = E81506532C94156900B7F8F4 /* Inject */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E81506542C94156900B7F8F4 /* Inject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +85,9 @@
 			dependencies = (
 			);
 			name = BBQuotes;
+			packageProductDependencies = (
+				E81506532C94156900B7F8F4 /* Inject */,
+			);
 			productName = BBQuotes;
 			productReference = E81506412C94144F00B7F8F4 /* BBQuotes.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +116,9 @@
 				Base,
 			);
 			mainGroup = E81506382C94144F00B7F8F4;
+			packageReferences = (
+				E81506522C94156900B7F8F4 /* XCRemoteSwiftPackageReference "Inject" */,
+			);
 			productRefGroup = E81506422C94144F00B7F8F4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -202,6 +210,10 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-Xlinker",
+					"-interposable",
+				);
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -344,6 +356,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E81506522C94156900B7F8F4 /* XCRemoteSwiftPackageReference "Inject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzysztofzablocki/Inject.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E81506532C94156900B7F8F4 /* Inject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E81506522C94156900B7F8F4 /* XCRemoteSwiftPackageReference "Inject" */;
+			productName = Inject;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E81506392C94144F00B7F8F4 /* Project object */;
 }
