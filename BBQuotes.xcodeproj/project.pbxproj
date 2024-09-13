@@ -12,6 +12,7 @@
 		E81506492C94145000B7F8F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E81506482C94145000B7F8F4 /* Assets.xcassets */; };
 		E815064C2C94145000B7F8F4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E815064B2C94145000B7F8F4 /* Preview Assets.xcassets */; };
 		E81506542C94156900B7F8F4 /* Inject in Frameworks */ = {isa = PBXBuildFile; productRef = E81506532C94156900B7F8F4 /* Inject */; };
+		E81506572C94197800B7F8F4 /* SwiftFormat in Frameworks */ = {isa = PBXBuildFile; productRef = E81506562C94197800B7F8F4 /* SwiftFormat */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E81506542C94156900B7F8F4 /* Inject in Frameworks */,
+				E81506572C94197800B7F8F4 /* SwiftFormat in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +78,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E815064F2C94145000B7F8F4 /* Build configuration list for PBXNativeTarget "BBQuotes" */;
 			buildPhases = (
+				E815065B2C941AB000B7F8F4 /* SwiftFormat */,
+				E815065F2C942A4A00B7F8F4 /* SwiftLint */,
 				E815063D2C94144F00B7F8F4 /* Sources */,
 				E815063E2C94144F00B7F8F4 /* Frameworks */,
 				E815063F2C94144F00B7F8F4 /* Resources */,
@@ -87,6 +91,7 @@
 			name = BBQuotes;
 			packageProductDependencies = (
 				E81506532C94156900B7F8F4 /* Inject */,
+				E81506562C94197800B7F8F4 /* SwiftFormat */,
 			);
 			productName = BBQuotes;
 			productReference = E81506412C94144F00B7F8F4 /* BBQuotes.app */;
@@ -118,6 +123,8 @@
 			mainGroup = E81506382C94144F00B7F8F4;
 			packageReferences = (
 				E81506522C94156900B7F8F4 /* XCRemoteSwiftPackageReference "Inject" */,
+				E81506552C94197700B7F8F4 /* XCRemoteSwiftPackageReference "SwiftFormat" */,
+				E815065C2C94223B00B7F8F4 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */,
 			);
 			productRefGroup = E81506422C94144F00B7F8F4 /* Products */;
 			projectDirPath = "";
@@ -139,6 +146,47 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E815065B2C941AB000B7F8F4 /* SwiftFormat */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftFormat;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SWIFTFORMAT_DIR=\"${BUILD_DIR%Build/*}SourcePackages/checkouts/SwiftFormat#swift-package-manager-plugin/CommandLineTool\"\nSWIFTFORMAT_CMD=\"$SWIFTFORMAT_DIR/swiftformat\"\n\nif test -f \"$SWIFTFORMAT_CMD\"\nthen\n    \"$SWIFTFORMAT_CMD\" .\nelse\n    echo \"warning: SwiftFormat not found. Make sure it's installed via 'Add Package' in Xcode.\"\nfi\n";
+		};
+		E815065F2C942A4A00B7F8F4 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SWIFT_PACKAGE_DIR=\"${BUILD_DIR%Build/*}SourcePackages/artifacts\"\nSWIFTLINT_CMD=$(ls \"$SWIFT_PACKAGE_DIR\"/swiftlintplugins/SwiftLintBinary/SwiftLintBinary.artifactbundle/swiftlint-*/bin/swiftlint | head -n 1)\n\nif test -f \"$SWIFTLINT_CMD\" 2>&1\nthen\n    \"$SWIFTLINT_CMD\"\nelse\n    echo \"warning: SwiftLint command not found - See https://github.com/realm/SwiftLint#installation for installation instructions.\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E815063D2C94144F00B7F8F4 /* Sources */ = {
@@ -190,7 +238,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -257,7 +305,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -366,6 +414,22 @@
 				minimumVersion = 1.5.2;
 			};
 		};
+		E81506552C94197700B7F8F4 /* XCRemoteSwiftPackageReference "SwiftFormat" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nicklockwood/SwiftFormat#swift-package-manager-plugin";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.54.5;
+			};
+		};
+		E815065C2C94223B00B7F8F4 /* XCRemoteSwiftPackageReference "SwiftLintPlugins" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SimplyDanny/SwiftLintPlugins";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.57.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -373,6 +437,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E81506522C94156900B7F8F4 /* XCRemoteSwiftPackageReference "Inject" */;
 			productName = Inject;
+		};
+		E81506562C94197800B7F8F4 /* SwiftFormat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E81506552C94197700B7F8F4 /* XCRemoteSwiftPackageReference "SwiftFormat" */;
+			productName = SwiftFormat;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
