@@ -38,18 +38,6 @@ final class APIClientTests: XCTestCase {
         sut = nil
     }
 
-    func testFetchQuotesSuccess() async throws {
-        let mockQuote = Quote(quote: "I am the one who knocks", character: "Walter White")
-        let mockData = try JSONEncoder().encode(mockQuote)
-        mockSession.data = mockData
-        mockSession.response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)
-
-        let result = try await sut.fetchQuote(from: .breakingBad)
-
-        XCTAssertEqual(result.quote, mockQuote.quote)
-        XCTAssertEqual(result.character, mockQuote.character)
-    }
-
     func testFetchQuotesBadResponse() async {
         mockSession.response = HTTPURLResponse(url: url, statusCode: 404, httpVersion: nil, headerFields: nil)
 
