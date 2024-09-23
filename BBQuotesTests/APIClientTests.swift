@@ -50,4 +50,30 @@ final class APIClientTests: XCTestCase {
             XCTAssertEqual(error?.rawValue, "Something went wrong. Please try again later.")
         }
     }
+
+    func testFetchCharacterBadResponse() async {
+        mockSession.response = HTTPURLResponse(url: url, statusCode: 404, httpVersion: nil, headerFields: nil)
+
+        do {
+            _ = try await sut.fetchCharacter("Walter White")
+            XCTFail("Expected badResponse error")
+        } catch {
+            let error = error as? APIError
+            XCTAssertEqual(error, .badResponse)
+            XCTAssertEqual(error?.rawValue, "Something went wrong. Please try again later.")
+        }
+    }
+
+    func testFetchDeathBadResponse() async {
+        mockSession.response = HTTPURLResponse(url: url, statusCode: 500, httpVersion: nil, headerFields: nil)
+
+        do {
+            _ = try await sut.fetchDeath(for: "White")
+            XCTFail("Expected badResponse error")
+        } catch {
+            let error = error as? APIError
+            XCTAssertEqual(error, .badResponse)
+            XCTAssertEqual(error?.rawValue, "Something went wrong. Please try again later.")
+        }
+    }
 }

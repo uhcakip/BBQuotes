@@ -34,6 +34,32 @@ struct APIClient {
 
         return try decoder.decode(Quote.self, from: data)
     }
+
+    func fetchCharacter(_ name: String) async throws -> Character {
+        let url = APIEndpoint.characters.url
+            .appending(queryItems: [.init(name: "name", value: name)])
+
+        let (data, resp) = try await session.data(from: url)
+
+        guard let resp = resp as? HTTPURLResponse, resp.statusCode == 200 else {
+            throw APIError.badResponse
+        }
+
+        let characters = try decoder.decode([Character].self, from: data)
+        return characters[0]
+    }
+
+    func fetchDeath(for character: String) async throws -> Death? {
+        let url = APIEndpoint.deaths.url
+        let (data, resp) = try await session.data(from: url)
+
+        guard let resp = resp as? HTTPURLResponse, resp.statusCode == 200 else {
+            throw APIError.badResponse
+        }
+
+        let deaths = try decoder.decode([Death].self, from: data)
+        return deaths.first { $0.character == character }
+    }
 }
 
 enum Production: String {
