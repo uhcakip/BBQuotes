@@ -13,7 +13,13 @@ protocol URLSessionProtocol {
 
 extension URLSession: URLSessionProtocol {}
 
-struct APIClient {
+protocol APIClientProtocol {
+    func fetchQuote(from production: Production) async throws -> Quote
+    func fetchCharacter(_ name: String) async throws -> Character
+    func fetchDeath(for name: String) async throws -> Death?
+}
+
+struct APIClient: APIClientProtocol {
     private let session: URLSessionProtocol
     private let decoder = JSONDecoder()
 
