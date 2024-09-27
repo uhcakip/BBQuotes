@@ -68,11 +68,6 @@ struct APIClient: APIClientProtocol {
     }
 }
 
-enum Production: String {
-    case breakingBad = "Breaking Bad"
-    case betterCallSaul = "Better Call Saul"
-}
-
 enum APIError: String, Error {
     case badResponse = "Something went wrong. Please try again later."
 }

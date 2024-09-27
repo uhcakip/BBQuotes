@@ -11,16 +11,9 @@ import SwiftUI
 struct QuoteView: View {
     let production: Production
     private let viewModel = ViewModel()
-    private let backgroundImgName: String
-    private let buttonColor: Color
-    private let shadowColor: Color
 
     init(production: Production) {
         self.production = production
-        backgroundImgName = production.rawValue.replacingOccurrences(of: " ", with: "-").lowercased()
-        let colorName = production.rawValue.replacingOccurrences(of: " ", with: "")
-        buttonColor = Color("\(colorName)Button")
-        shadowColor = Color("\(colorName)Shadow")
 
         Task { [self] in
             await viewModel.fetchData(for: production)
@@ -30,7 +23,7 @@ struct QuoteView: View {
     var body: some View {
         GeometryReader { geo in
             ZStack {
-                Image(backgroundImgName)
+                Image(production.backgroundImageName)
                     .resizable()
                     .frame(width: geo.size.width * 2.7, height: geo.size.height * 1.2)
 
@@ -87,9 +80,9 @@ struct QuoteView: View {
                             .font(.title3)
                             .foregroundStyle(.white)
                             .padding()
-                            .background(buttonColor)
+                            .background(Color(production.buttonColorName))
                             .clipShape(.rect(cornerRadius: 7))
-                            .shadow(color: shadowColor, radius: 5)
+                            .shadow(color: Color(production.shadowColorName), radius: 5)
                     }
 
                     Spacer(minLength: 95)
