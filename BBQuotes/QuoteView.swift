@@ -9,6 +9,8 @@ import Inject
 import SwiftUI
 
 struct QuoteView: View {
+    @State private var characterImg: Image?
+    @State private var showCharacterInfo = false
     let production: Production
     private let viewModel = ViewModel()
 
@@ -47,10 +49,13 @@ struct QuoteView: View {
                                 .padding(.horizontal)
 
                             ZStack(alignment: .bottom) {
-                                AsyncImage(url: viewModel.character!.images.randomElement()) { img in
+                                AsyncImage(url: viewModel.character?.images.randomElement()) { img in
                                     img
                                         .resizable()
                                         .scaledToFill()
+                                        .onAppear {
+                                            characterImg = img
+                                        }
                                 } placeholder: {
                                     ProgressView()
                                 }
@@ -64,6 +69,11 @@ struct QuoteView: View {
                             }
                             .frame(width: geo.size.width / 1.1, height: geo.size.height / 1.8)
                             .clipShape(.rect(cornerRadius: 50))
+                            .onTapGesture {
+                                if viewModel.character != nil, characterImg != nil {
+                                    showCharacterInfo = true
+                                }
+                            }
                         case let .failure(error):
                             Text(error.localizedDescription)
                         }
@@ -72,6 +82,7 @@ struct QuoteView: View {
                     }
 
                     Button {
+                        characterImg = nil
                         Task {
                             await viewModel.fetchData(for: production)
                         }
@@ -92,6 +103,9 @@ struct QuoteView: View {
             .frame(width: geo.size.width, height: geo.size.height)
         }
         .ignoresSafeArea()
+        .sheet(isPresented: $showCharacterInfo) {
+            CharacterView(characterImg: $characterImg, production: production, character: viewModel.character!)
+        }
     }
 }
 
