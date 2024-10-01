@@ -72,6 +72,7 @@ struct QuoteView: View {
             .onTapGesture {
                 showCharacterInfo = true
             }
+            .accessibilityAddTraits(.isButton)
         } else {
             EmptyView()
         }
