@@ -26,11 +26,10 @@ import Foundation
         }
     }
 
-    var fetchStatus = DataFetchStatus.idle
-
     let client: APIClientProtocol
     var quote: Quote?
     var character: Character?
+    var fetchStatus = DataFetchStatus.idle
 
     init(client: APIClientProtocol = APIClient()) {
         self.client = client

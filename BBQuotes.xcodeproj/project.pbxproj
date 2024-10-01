@@ -18,6 +18,7 @@
 		E876D6AA2C99577B00994F0C /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E876D6A92C99577B00994F0C /* APIEndpoint.swift */; };
 		E876D6AE2C995C4B00994F0C /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E876D6AD2C995C4B00994F0C /* APIClient.swift */; };
 		E89897B52CAA6D39009B8323 /* CharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89897B42CAA6D39009B8323 /* CharacterView.swift */; };
+		E89897BB2CABE2E6009B8323 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89897BA2CABE2E6009B8323 /* MockData.swift */; };
 		E8AE7C402C9A9D6A00259CDC /* APIEndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AE7C3F2C9A9D6A00259CDC /* APIEndpointTests.swift */; };
 		E8C19E682CA12E4F0095F312 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C19E672CA12E4F0095F312 /* ViewModel.swift */; };
 		E8DBE9382CA14D51003C09FA /* ViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DBE9372CA14D51003C09FA /* ViewModelTests.swift */; };
@@ -50,6 +51,7 @@
 		E876D6A92C99577B00994F0C /* APIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
 		E876D6AD2C995C4B00994F0C /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		E89897B42CAA6D39009B8323 /* CharacterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterView.swift; sourceTree = "<group>"; };
+		E89897BA2CABE2E6009B8323 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		E8AE7C362C9A945100259CDC /* BBQuotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BBQuotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8AE7C3F2C9A9D6A00259CDC /* APIEndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpointTests.swift; sourceTree = "<group>"; };
 		E8C19E672CA12E4F0095F312 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 		E815064A2C94145000B7F8F4 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				E89897BA2CABE2E6009B8323 /* MockData.swift */,
 				E815064B2C94145000B7F8F4 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
@@ -266,7 +269,7 @@
 		E815065B2C941AB000B7F8F4 /* SwiftFormat */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -309,6 +312,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8E292AD2C96B7F800AC84FA /* Death.swift in Sources */,
+				E89897BB2CABE2E6009B8323 /* MockData.swift in Sources */,
 				E81506472C94144F00B7F8F4 /* ContentView.swift in Sources */,
 				E8E292AF2C96B83B00AC84FA /* Character.swift in Sources */,
 				E84C182F2CA5CFA400378F83 /* Production.swift in Sources */,
