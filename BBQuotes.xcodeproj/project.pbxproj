@@ -283,7 +283,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "SWIFTFORMAT_DIR=\"${BUILD_DIR%Build/*}SourcePackages/checkouts/SwiftFormat#swift-package-manager-plugin/CommandLineTool\"\nSWIFTFORMAT_CMD=\"$SWIFTFORMAT_DIR/swiftformat\"\n\nif test -f \"$SWIFTFORMAT_CMD\"\nthen\n    \"$SWIFTFORMAT_CMD\" .\nelse\n    echo \"warning: SwiftFormat not found. Make sure it's installed via 'Add Package' in Xcode.\"\nfi\n";
+			shellScript = "SWIFTFORMAT_DIR=\"${BUILD_DIR%Build/*}SourcePackages/checkouts/SwiftFormat#swift-package-manager-plugin/CommandLineTool\"\nSWIFTFORMAT_CMD=\"$SWIFTFORMAT_DIR/swiftformat\"\n\nif test -f \"$SWIFTFORMAT_CMD\"\nthen\n    \"$SWIFTFORMAT_CMD\" --disable wrapMultilineStatementBraces .\nelse\n    echo \"warning: SwiftFormat not found. Make sure it's installed via 'Add Package' in Xcode.\"\nfi\n";
 		};
 		E815065F2C942A4A00B7F8F4 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
