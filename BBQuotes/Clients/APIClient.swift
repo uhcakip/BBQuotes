@@ -19,6 +19,13 @@ protocol APIClientProtocol {
     func fetchDeath(for name: String) async throws -> Death?
 }
 
+struct Endpoint {
+    private static let baseURL = URL(string: "https://breaking-bad-api-six.vercel.app/api")!
+    static let quotes = baseURL.appending(path: "quotes/random")
+    static let characters = baseURL.appending(path: "characters")
+    static let deaths = baseURL.appending(path: "deaths")
+}
+
 struct APIClient: APIClientProtocol {
     private let session: URLSessionProtocol
     private let decoder = JSONDecoder()
@@ -29,9 +36,7 @@ struct APIClient: APIClientProtocol {
     }
 
     func fetchQuote(from production: Production) async throws -> Quote {
-        let url = APIEndpoint.quotes.url
-            .appending(queryItems: [.init(name: "production", value: production.rawValue)])
-
+        let url = Endpoint.quotes.appending(queryItems: [.init(name: "production", value: production.rawValue)])
         let (data, resp) = try await session.data(from: url)
 
         guard let resp = resp as? HTTPURLResponse, resp.statusCode == 200 else {
@@ -42,9 +47,7 @@ struct APIClient: APIClientProtocol {
     }
 
     func fetchCharacter(_ name: String) async throws -> Character {
-        let url = APIEndpoint.characters.url
-            .appending(queryItems: [.init(name: "name", value: name)])
-
+        let url = Endpoint.characters.appending(queryItems: [.init(name: "name", value: name)])
         let (data, resp) = try await session.data(from: url)
 
         guard let resp = resp as? HTTPURLResponse, resp.statusCode == 200 else {
@@ -56,7 +59,7 @@ struct APIClient: APIClientProtocol {
     }
 
     func fetchDeath(for character: String) async throws -> Death? {
-        let url = APIEndpoint.deaths.url
+        let url = Endpoint.deaths
         let (data, resp) = try await session.data(from: url)
 
         guard let resp = resp as? HTTPURLResponse, resp.statusCode == 200 else {
