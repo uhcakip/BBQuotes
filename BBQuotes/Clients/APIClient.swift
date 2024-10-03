@@ -19,7 +19,7 @@ protocol APIClientProtocol {
     func fetchDeath(for name: String) async throws -> Death?
 }
 
-struct Endpoint {
+enum Endpoint {
     private static let baseURL = URL(string: "https://breaking-bad-api-six.vercel.app/api")!
     static let quotes = baseURL.appending(path: "quotes/random")
     static let characters = baseURL.appending(path: "characters")
@@ -71,6 +71,15 @@ struct APIClient: APIClientProtocol {
     }
 }
 
-enum APIError: String, Error {
-    case badResponse = "Something went wrong. Please try again later."
+enum APIError: Error {
+    case badResponse
+}
+
+extension APIError: LocalizedError {
+    var errorDescription: String? {
+        switch self {
+        case .badResponse:
+            "Something went wrong. Please try again later."
+        }
+    }
 }

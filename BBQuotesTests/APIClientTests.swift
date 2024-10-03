@@ -47,7 +47,7 @@ final class APIClientTests: XCTestCase {
         } catch {
             let error = error as? APIError
             XCTAssertEqual(error, .badResponse)
-            XCTAssertEqual(error?.rawValue, "Something went wrong. Please try again later.")
+            XCTAssertEqual(error?.localizedDescription, "Something went wrong. Please try again later.")
         }
     }
 
@@ -60,7 +60,7 @@ final class APIClientTests: XCTestCase {
         } catch {
             let error = error as? APIError
             XCTAssertEqual(error, .badResponse)
-            XCTAssertEqual(error?.rawValue, "Something went wrong. Please try again later.")
+            XCTAssertEqual(error?.localizedDescription, "Something went wrong. Please try again later.")
         }
     }
 
@@ -73,7 +73,7 @@ final class APIClientTests: XCTestCase {
         } catch {
             let error = error as? APIError
             XCTAssertEqual(error, .badResponse)
-            XCTAssertEqual(error?.rawValue, "Something went wrong. Please try again later.")
+            XCTAssertEqual(error?.localizedDescription, "Something went wrong. Please try again later.")
         }
     }
 }
