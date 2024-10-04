@@ -9,10 +9,13 @@ import Inject
 import SwiftUI
 
 struct QuoteView: View {
-    @State private var characterInfoImage: Image?
-    @State private var showCharacterInfo = false
+    // MARK: - Properties
+
     let production: Production
-    private let viewModel: ViewModel
+    let viewModel: ViewModel
+    @State private var characterImage: Image?
+    @State private var showCharacterView = false
+    @Environment(\.geometrySize) private var size
 
     init(production: Production, viewModel: ViewModel = ViewModel()) {
         self.production = production
@@ -23,14 +26,15 @@ struct QuoteView: View {
         }
     }
 
-    private func backgroundImage(in geo: GeometryProxy) -> some View {
+    // MARK: - Views
+
+    private var backgroundImage: some View {
         Image(production.backgroundImageName)
             .resizable()
-            .frame(width: geo.size.width * 2.7, height: geo.size.height * 1.2)
+            .frame(width: size.width * 2.7, height: size.height * 1.2)
     }
 
-    @ViewBuilder
-    private var quoteContent: some View {
+    @ViewBuilder private var quoteContent: some View {
         if let quote = viewModel.quote {
             Text(quote.quote)
                 .minimumScaleFactor(0.5)
@@ -45,8 +49,7 @@ struct QuoteView: View {
         }
     }
 
-    @ViewBuilder
-    private func characterImage(in geo: GeometryProxy) -> some View {
+    @ViewBuilder private var characterContent: some View {
         if let character = viewModel.character {
             ZStack(alignment: .bottom) {
                 AsyncImage(url: character.images.randomElement()) { image in
@@ -54,12 +57,12 @@ struct QuoteView: View {
                         .resizable()
                         .scaledToFill()
                         .onAppear {
-                            characterInfoImage = image
+                            characterImage = image
                         }
                 } placeholder: {
                     ProgressView()
                 }
-                .frame(width: geo.size.width / 1.1, height: geo.size.height / 1.8)
+                .frame(width: size.width / 1.1, height: size.height / 1.8)
 
                 Text(character.name)
                     .foregroundStyle(.white)
@@ -67,10 +70,10 @@ struct QuoteView: View {
                     .frame(maxWidth: .infinity)
                     .background(.ultraThinMaterial)
             }
-            .frame(width: geo.size.width / 1.1, height: geo.size.height / 1.8)
+            .frame(width: size.width / 1.1, height: size.height / 1.8)
             .clipShape(RoundedRectangle(cornerRadius: 50))
             .onTapGesture {
-                showCharacterInfo = true
+                showCharacterView = true
             }
             .accessibilityAddTraits(.isButton)
         } else {
@@ -78,7 +81,7 @@ struct QuoteView: View {
         }
     }
 
-    private var quoteButton: some View {
+    private var fetchButton: some View {
         Button {
             Task {
                 await viewModel.fetchData(for: production)
@@ -95,41 +98,38 @@ struct QuoteView: View {
     }
 
     var body: some View {
-        GeometryReader { geo in
-            ZStack {
-                backgroundImage(in: geo)
+        ZStack {
+            backgroundImage
 
+            VStack {
                 VStack {
-                    VStack {
-                        Spacer(minLength: 60)
+                    Spacer(minLength: 80)
 
-                        switch viewModel.fetchStatus {
-                        case .idle:
-                            EmptyView()
-                        case .fetching:
-                            ProgressView()
-                        case .success:
-                            quoteContent
-                            characterImage(in: geo)
-                        case let .failure(error):
-                            Text(error.localizedDescription)
-                        }
-
-                        Spacer()
+                    switch viewModel.fetchStatus {
+                    case .idle:
+                        EmptyView()
+                    case .fetching:
+                        ProgressView()
+                    case .success:
+                        quoteContent
+                        characterContent
+                    case let .failure(error):
+                        Text(error.localizedDescription)
                     }
 
-                    quoteButton
-
-                    Spacer(minLength: 95)
+                    Spacer()
                 }
-                .frame(width: geo.size.width, height: geo.size.height)
+
+                fetchButton
+
+                Spacer(minLength: 85)
             }
-            .frame(width: geo.size.width, height: geo.size.height)
+            .frame(width: size.width, height: size.height)
         }
-        .ignoresSafeArea()
-        .sheet(isPresented: $showCharacterInfo) {
+        .frame(width: size.width, height: size.height)
+        .sheet(isPresented: $showCharacterView) {
             if let character = viewModel.character {
-                CharacterView(characterImage: $characterInfoImage, production: production, character: character)
+                CharacterView(production: production, character: character, characterImage: $characterImage)
             } else {
                 ProgressView()
             }
@@ -138,6 +138,10 @@ struct QuoteView: View {
 }
 
 #Preview {
-    QuoteView(production: .breakingBad, viewModel: .preview)
-        .preferredColorScheme(.dark)
+    GeometryReader { geo in
+        QuoteView(production: .breakingBad, viewModel: .preview)
+            .preferredColorScheme(.dark)
+            .environment(\.geometrySize, geo.size)
+    }
+    .ignoresSafeArea()
 }

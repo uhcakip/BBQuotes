@@ -10,22 +10,27 @@ import SwiftUI
 
 struct ContentView: View {
     @ObserveInjection var injection
+    @Environment(\.geometrySize) var size
 
     var body: some View {
-        TabView {
-            QuoteView(production: .breakingBad)
-                .toolbarBackground(.visible, for: .tabBar)
-                .tabItem {
-                    Label("Breaking Bad", systemImage: "tortoise")
-                }
+        GeometryReader { geo in
+            TabView {
+                QuoteView(production: .breakingBad)
+                    .toolbarBackground(.visible, for: .tabBar)
+                    .tabItem {
+                        Label("Breaking Bad", systemImage: "tortoise")
+                    }
 
-            QuoteView(production: .betterCallSaul)
-                .toolbarBackground(.visible, for: .tabBar)
-                .tabItem {
-                    Label("Better Call Saul", systemImage: "briefcase")
-                }
+                QuoteView(production: .betterCallSaul)
+                    .toolbarBackground(.visible, for: .tabBar)
+                    .tabItem {
+                        Label("Better Call Saul", systemImage: "briefcase")
+                    }
+            }
+            .environment(\.geometrySize, geo.size)
         }
         .preferredColorScheme(.dark)
+        .ignoresSafeArea()
         .enableInjection()
     }
 }

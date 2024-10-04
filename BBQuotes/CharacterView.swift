@@ -9,9 +9,14 @@ import Inject
 import SwiftUI
 
 struct CharacterView: View {
-    @Binding var characterImage: Image?
+    // MARK: - Properties
+
     let production: Production
     let character: Character
+    @Binding var characterImage: Image?
+    @Environment(\.geometrySize) private var size
+
+    // MARK: - Views
 
     private var backgroundImage: some View {
         Image(production.backgroundImageName)
@@ -19,8 +24,7 @@ struct CharacterView: View {
             .scaledToFit()
     }
 
-    @ViewBuilder
-    private var characterInfo: some View {
+    @ViewBuilder private var characterInfo: some View {
         Text(character.name)
             .font(.largeTitle)
 
@@ -58,8 +62,7 @@ struct CharacterView: View {
         }
     }
 
-    @ViewBuilder
-    private var characterStatus: some View {
+    @ViewBuilder private var characterStatus: some View {
         Divider()
 
         DisclosureGroup("Status (spoiler alert)") {
@@ -89,31 +92,28 @@ struct CharacterView: View {
     }
 
     var body: some View {
-        GeometryReader { geo in
-            ZStack(alignment: .top) {
-                backgroundImage
+        ZStack(alignment: .top) {
+            backgroundImage
 
-                ScrollView {
-                    if let characterImage {
-                        characterImage
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: geo.size.width / 1.2, height: geo.size.height / 1.7)
-                            .clipShape(.rect(cornerRadius: 25))
-                            .padding(.top, 60)
-                    }
-
-                    VStack(alignment: .leading) {
-                        characterInfo
-                        characterStatus
-                    }
-                    .frame(width: geo.size.width / 1.25, alignment: .leading)
-                    .padding(.bottom, 50)
+            ScrollView {
+                if let characterImage {
+                    characterImage
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: size.width / 1.2, height: size.height / 1.7)
+                        .clipShape(.rect(cornerRadius: 25))
+                        .padding(.top, 60)
                 }
-                .scrollIndicators(.hidden)
+
+                VStack(alignment: .leading) {
+                    characterInfo
+                    characterStatus
+                }
+                .frame(width: size.width / 1.25, alignment: .leading)
+                .padding(.bottom, 50)
             }
+            .scrollIndicators(.hidden)
         }
-        .ignoresSafeArea()
     }
 }
 
@@ -122,15 +122,19 @@ struct CharacterView: View {
         @State private var characterImage: Image?
 
         var body: some View {
-            CharacterView(characterImage: $characterImage, production: .breakingBad, character: .mock)
-                .preferredColorScheme(.dark)
-                .onAppear {
-                    if let url = Character.mock.images.first,
-                       let imageData = try? Data(contentsOf: url),
-                       let uiImage = UIImage(data: imageData) {
-                        characterImage = Image(uiImage: uiImage)
+            GeometryReader { geo in
+                CharacterView(production: .breakingBad, character: .mock, characterImage: $characterImage)
+                    .preferredColorScheme(.dark)
+                    .environment(\.geometrySize, geo.size)
+                    .onAppear {
+                        if let url = Character.mock.images.first,
+                           let imageData = try? Data(contentsOf: url),
+                           let uiImage = UIImage(data: imageData) {
+                            characterImage = Image(uiImage: uiImage)
+                        }
                     }
-                }
+            }
+            .ignoresSafeArea()
         }
     }
 
