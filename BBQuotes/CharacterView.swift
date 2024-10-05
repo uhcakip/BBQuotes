@@ -13,6 +13,7 @@ struct CharacterView: View {
 
     let production: Production
     let character: Character
+    @ObserveInjection var injection
     @Binding var characterImage: Image?
     @Environment(\.geometrySize) private var size
 

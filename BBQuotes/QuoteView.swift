@@ -13,6 +13,7 @@ struct QuoteView: View {
 
     let production: Production
     let viewModel: ViewModel
+    @ObserveInjection var injection
     @State private var characterImage: Image?
     @State private var showCharacterView = false
     @Environment(\.geometrySize) private var size
