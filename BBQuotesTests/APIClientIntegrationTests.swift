@@ -22,6 +22,11 @@ final class APIClientIntegrationTests: XCTestCase {
     func testFetchCharacterIntegration() async throws {
         let character = try await client.fetchCharacter(characterName)
 
+        guard let character else {
+            XCTFail("Character should not be nil")
+            return
+        }
+
         XCTAssertEqual(character.name, characterName)
         XCTAssertEqual(character.birthday, "09-07-1958")
         XCTAssertFalse(character.occupations.isEmpty)

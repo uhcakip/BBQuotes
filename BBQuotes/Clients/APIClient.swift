@@ -15,7 +15,7 @@ extension URLSession: URLSessionProtocol {}
 
 protocol APIClientProtocol {
     func fetchQuote(from production: Production) async throws -> Quote
-    func fetchCharacter(_ name: String) async throws -> Character
+    func fetchCharacter(_ name: String) async throws -> Character?
     func fetchDeath(for name: String) async throws -> Death?
 }
 
@@ -35,38 +35,30 @@ struct APIClient: APIClientProtocol {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
     }
 
-    func fetchQuote(from production: Production) async throws -> Quote {
-        let url = Endpoint.quotes.appending(queryItems: [.init(name: "production", value: production.rawValue)])
+    private func makeRequest<T: Decodable>(from url: URL) async throws -> T {
         let (data, resp) = try await session.data(from: url)
 
         guard let resp = resp as? HTTPURLResponse, resp.statusCode == 200 else {
             throw APIError.badResponse
         }
 
-        return try decoder.decode(Quote.self, from: data)
+        return try decoder.decode(T.self, from: data)
     }
 
-    func fetchCharacter(_ name: String) async throws -> Character {
+    func fetchQuote(from production: Production) async throws -> Quote {
+        let url = Endpoint.quotes.appending(queryItems: [.init(name: "production", value: production.rawValue)])
+        return try await makeRequest(from: url)
+    }
+
+    func fetchCharacter(_ name: String) async throws -> Character? {
         let url = Endpoint.characters.appending(queryItems: [.init(name: "name", value: name)])
-        let (data, resp) = try await session.data(from: url)
-
-        guard let resp = resp as? HTTPURLResponse, resp.statusCode == 200 else {
-            throw APIError.badResponse
-        }
-
-        let characters = try decoder.decode([Character].self, from: data)
-        return characters[0]
+        let characters: [Character] = try await makeRequest(from: url)
+        return characters.first
     }
 
     func fetchDeath(for character: String) async throws -> Death? {
         let url = Endpoint.deaths
-        let (data, resp) = try await session.data(from: url)
-
-        guard let resp = resp as? HTTPURLResponse, resp.statusCode == 200 else {
-            throw APIError.badResponse
-        }
-
-        let deaths = try decoder.decode([Death].self, from: data)
+        let deaths: [Death] = try await makeRequest(from: url)
         return deaths.first { $0.character == character }
     }
 }

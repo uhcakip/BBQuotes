@@ -19,7 +19,7 @@ class MockAPIClient: APIClientProtocol {
         return quoteToReturn ?? Quote(quote: "", character: "")
     }
 
-    func fetchCharacter(_ name: String) async throws -> Character {
+    func fetchCharacter(_ name: String) async throws -> Character? {
         if let error = errorToThrow { throw error }
         return characterToReturn ?? Character(
             name: name,
