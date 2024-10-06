@@ -10,6 +10,7 @@ import Foundation
 enum Production: String {
     case breakingBad = "Breaking Bad"
     case betterCallSaul = "Better Call Saul"
+    case elCamino = "El Camino"
 
     private var colorName: String {
         rawValue.replacingOccurrences(of: " ", with: "")

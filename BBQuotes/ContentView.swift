@@ -26,6 +26,12 @@ struct ContentView: View {
                     .tabItem {
                         Label("Better Call Saul", systemImage: "briefcase")
                     }
+
+                QuoteView(production: .elCamino)
+                    .toolbarBackground(.visible, for: .tabBar)
+                    .tabItem {
+                        Label("El Camino", systemImage: "car")
+                    }
             }
             .environment(\.geometrySize, geo.size)
         }
