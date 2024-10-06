@@ -14,7 +14,6 @@ struct QuoteView: View {
     let production: Production
     let viewModel: ViewModel
     @ObserveInjection var injection
-    @State private var characterImage: Image?
     @State private var showCharacterView = false
     @Environment(\.geometrySize) private var size
 
@@ -53,13 +52,10 @@ struct QuoteView: View {
     @ViewBuilder private var characterContent: some View {
         if let character = viewModel.character {
             ZStack(alignment: .bottom) {
-                AsyncImage(url: character.images.randomElement()) { image in
+                AsyncImage(url: character.images.first) { image in
                     image
                         .resizable()
                         .scaledToFill()
-                        .onAppear {
-                            characterImage = image
-                        }
                 } placeholder: {
                     ProgressView()
                 }
@@ -130,7 +126,7 @@ struct QuoteView: View {
         .frame(width: size.width, height: size.height)
         .sheet(isPresented: $showCharacterView) {
             if let character = viewModel.character {
-                CharacterView(production: production, character: character, characterImage: $characterImage)
+                CharacterView(production: production, character: character)
             } else {
                 ProgressView()
             }

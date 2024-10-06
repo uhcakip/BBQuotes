@@ -14,7 +14,6 @@ struct CharacterView: View {
     let production: Production
     let character: Character
     @ObserveInjection var injection
-    @Binding var characterImage: Image?
     @Environment(\.geometrySize) private var size
 
     // MARK: - Views
@@ -23,6 +22,24 @@ struct CharacterView: View {
         Image(production.backgroundImageName)
             .resizable()
             .scaledToFit()
+    }
+
+    @ViewBuilder private var characterGallery: some View {
+        TabView {
+            ForEach(character.images, id: \.self) { imageURL in
+                AsyncImage(url: imageURL) { image in
+                    image
+                        .resizable()
+                        .scaledToFill()
+                } placeholder: {
+                    ProgressView()
+                }
+            }
+        }
+        .tabViewStyle(.page)
+        .frame(width: size.width / 1.2, height: size.height / 1.7)
+        .clipShape(.rect(cornerRadius: 25))
+        .padding(.top, 60)
     }
 
     @ViewBuilder private var characterInfo: some View {
@@ -97,14 +114,7 @@ struct CharacterView: View {
             backgroundImage
 
             ScrollView {
-                if let characterImage {
-                    characterImage
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: size.width / 1.2, height: size.height / 1.7)
-                        .clipShape(.rect(cornerRadius: 25))
-                        .padding(.top, 60)
-                }
+                characterGallery
 
                 VStack(alignment: .leading) {
                     characterInfo
@@ -124,7 +134,7 @@ struct CharacterView: View {
 
         var body: some View {
             GeometryReader { geo in
-                CharacterView(production: .breakingBad, character: .mock, characterImage: $characterImage)
+                CharacterView(production: .breakingBad, character: .mock)
                     .preferredColorScheme(.dark)
                     .environment(\.geometrySize, geo.size)
                     .onAppear {
