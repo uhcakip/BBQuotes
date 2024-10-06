@@ -9,7 +9,7 @@ import Inject
 import SwiftUI
 
 struct CharacterView: View {
-    // MARK: - Properties
+    // MARK: - Variables
 
     let production: Production
     let character: Character

@@ -9,7 +9,7 @@ import Inject
 import SwiftUI
 
 struct QuoteView: View {
-    // MARK: - Properties
+    // MARK: - Variables
 
     let production: Production
     let viewModel: ViewModel
