@@ -13,6 +13,7 @@ struct CharacterView: View {
 
     let production: Production
     let character: Character
+    private let detailProxyID = "characterDetail"
     @ObserveInjection var injection
 
     // MARK: - Views
@@ -61,7 +62,7 @@ struct CharacterView: View {
         }
     }
 
-    @ViewBuilder private var characterStatus: some View {
+    @ViewBuilder private func characterStatus(scrollProxy proxy: ScrollViewProxy) -> some View {
         Divider()
 
         DisclosureGroup("Status (spoiler alert)") {
@@ -75,6 +76,11 @@ struct CharacterView: View {
                             .resizable()
                             .scaledToFit()
                             .clipShape(.rect(cornerRadius: 15))
+                            .onAppear {
+                                withAnimation {
+                                    proxy.scrollTo(detailProxyID)
+                                }
+                            }
                     } placeholder: {
                         ProgressView()
                     }
@@ -110,20 +116,23 @@ struct CharacterView: View {
 
     var body: some View {
         GeometryReader { geo in
-            ZStack(alignment: .top) {
-                backgroundImage
+            ScrollViewReader { proxy in
+                ZStack(alignment: .top) {
+                    backgroundImage
 
-                ScrollView {
-                    characterGallery(geoSize: geo.size)
+                    ScrollView {
+                        characterGallery(geoSize: geo.size)
 
-                    VStack(alignment: .leading) {
-                        characterInfo
-                        characterStatus
+                        VStack(alignment: .leading) {
+                            characterInfo
+                            characterStatus(scrollProxy: proxy)
+                        }
+                        .frame(width: geo.size.width / 1.25, alignment: .leading)
+                        .padding(.bottom, 50)
+                        .id(detailProxyID)
                     }
-                    .frame(width: geo.size.width / 1.25, alignment: .leading)
-                    .padding(.bottom, 50)
+                    .scrollIndicators(.hidden)
                 }
-                .scrollIndicators(.hidden)
             }
         }
         .ignoresSafeArea()
