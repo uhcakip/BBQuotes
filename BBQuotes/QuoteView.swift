@@ -15,7 +15,6 @@ struct QuoteView: View {
     let viewModel: ViewModel
     @ObserveInjection var injection
     @State private var showCharacterView = false
-    @Environment(\.geometrySize) private var size
 
     init(production: Production, viewModel: ViewModel = ViewModel()) {
         self.production = production
@@ -28,10 +27,26 @@ struct QuoteView: View {
 
     // MARK: - Views
 
-    private var backgroundImage: some View {
+    private func backgroundImage(geoSize size: CGSize) -> some View {
         Image(production.backgroundImageName)
             .resizable()
             .frame(width: size.width * 2.7, height: size.height * 1.2)
+    }
+
+    private var fetchButton: some View {
+        Button {
+            Task {
+                await viewModel.fetchData(for: production)
+            }
+        } label: {
+            Text("Get Random Quote")
+                .font(.title3)
+                .foregroundStyle(.white)
+                .padding()
+                .background(Color(production.buttonColorName))
+                .clipShape(RoundedRectangle(cornerRadius: 7))
+                .shadow(color: Color(production.shadowColorName), radius: 5)
+        }
     }
 
     @ViewBuilder private var quoteContent: some View {
@@ -49,7 +64,7 @@ struct QuoteView: View {
         }
     }
 
-    @ViewBuilder private var characterContent: some View {
+    @ViewBuilder private func characterContent(geoSize size: CGSize) -> some View {
         if let character = viewModel.character {
             ZStack(alignment: .bottom) {
                 AsyncImage(url: character.images.first) { image in
@@ -78,52 +93,38 @@ struct QuoteView: View {
         }
     }
 
-    private var fetchButton: some View {
-        Button {
-            Task {
-                await viewModel.fetchData(for: production)
-            }
-        } label: {
-            Text("Get Random Quote")
-                .font(.title3)
-                .foregroundStyle(.white)
-                .padding()
-                .background(Color(production.buttonColorName))
-                .clipShape(RoundedRectangle(cornerRadius: 7))
-                .shadow(color: Color(production.shadowColorName), radius: 5)
-        }
-    }
-
     var body: some View {
-        ZStack {
-            backgroundImage
+        GeometryReader { geo in
+            ZStack {
+                backgroundImage(geoSize: geo.size)
 
-            VStack {
                 VStack {
-                    Spacer(minLength: 80)
+                    VStack {
+                        Spacer(minLength: 60)
 
-                    switch viewModel.fetchStatus {
-                    case .idle:
-                        EmptyView()
-                    case .fetching:
-                        ProgressView()
-                    case .success:
-                        quoteContent
-                        characterContent
-                    case let .failure(error):
-                        Text(error.localizedDescription)
+                        switch viewModel.fetchStatus {
+                        case .idle:
+                            EmptyView()
+                        case .fetching:
+                            ProgressView()
+                        case .success:
+                            quoteContent
+                            characterContent(geoSize: geo.size)
+                        case let .failure(error):
+                            Text(error.localizedDescription)
+                        }
+
+                        Spacer()
                     }
 
-                    Spacer()
+                    fetchButton
+                    Spacer(minLength: 95)
                 }
-
-                fetchButton
-
-                Spacer(minLength: 85)
+                .frame(width: geo.size.width, height: geo.size.height)
             }
-            .frame(width: size.width, height: size.height)
+            .frame(width: geo.size.width, height: geo.size.height)
         }
-        .frame(width: size.width, height: size.height)
+        .ignoresSafeArea()
         .sheet(isPresented: $showCharacterView) {
             if let character = viewModel.character {
                 CharacterView(production: production, character: character)
@@ -135,10 +136,6 @@ struct QuoteView: View {
 }
 
 #Preview {
-    GeometryReader { geo in
-        QuoteView(production: .breakingBad, viewModel: .preview)
-            .preferredColorScheme(.dark)
-            .environment(\.geometrySize, geo.size)
-    }
-    .ignoresSafeArea()
+    QuoteView(production: .breakingBad, viewModel: .preview)
+        .preferredColorScheme(.dark)
 }
