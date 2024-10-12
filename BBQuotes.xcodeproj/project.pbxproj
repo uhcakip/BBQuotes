@@ -172,6 +172,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		E802B3B92CBA676E00D3B833 /* Utlis */ = {
+			isa = PBXGroup;
+			children = (
+				E89897BA2CABE2E6009B8323 /* MockData.swift */,
+			);
+			path = Utlis;
+			sourceTree = "<group>";
+		};
 		E81506382C94144F00B7F8F4 = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +205,7 @@
 				E876D6A82C9955AC00994F0C /* Clients */,
 				E8E292A92C96B74300AC84FA /* Models */,
 				E802B3AD2CBA5B4B00D3B833 /* Screens */,
+				E802B3B92CBA676E00D3B833 /* Utlis */,
 				E81506482C94145000B7F8F4 /* Assets.xcassets */,
 				E815064A2C94145000B7F8F4 /* Preview Content */,
 			);
@@ -206,7 +215,6 @@
 		E815064A2C94145000B7F8F4 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				E89897BA2CABE2E6009B8323 /* MockData.swift */,
 				E815064B2C94145000B7F8F4 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";

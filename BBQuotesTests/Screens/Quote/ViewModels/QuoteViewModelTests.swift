@@ -19,17 +19,9 @@ class MockAPIClient: APIClientProtocol {
         return quoteToReturn ?? Quote(quote: "", character: "")
     }
 
-    func fetchCharacter(_ name: String) async throws -> Character? {
+    func fetchCharacter(_: String) async throws -> Character? {
         if let error = errorToThrow { throw error }
-        return characterToReturn ?? Character(
-            name: name,
-            birthday: "",
-            occupations: [],
-            images: [],
-            aliases: [],
-            status: "",
-            portrayedBy: ""
-        )
+        return characterToReturn
     }
 
     func fetchDeath(for _: String) async throws -> Death? {
@@ -55,22 +47,9 @@ class QuoteViewModelTests: XCTestCase {
     }
 
     func testFetchDataSuccess() async {
-        let expectedQuote = Quote(quote: "I am the one who knocks", character: "Walter White")
-        var expectedCharacter = Character(
-            name: "Walter White",
-            birthday: "09-07-1958",
-            occupations: ["Chemistry Teacher", "Meth King Pin"],
-            images: [URL(string: "https://example.com/walter.jpg")!],
-            aliases: ["Heisenberg"],
-            status: "Deceased",
-            portrayedBy: "Bryan Cranston"
-        )
-        let expectedDeath = Death(
-            character: "Walter White",
-            image: URL(string: "https://example.com/walter_death.jpg")!,
-            details: "Shot",
-            lastWords: "I did it for me. I liked it."
-        )
+        let expectedQuote = Quote.mock
+        var expectedCharacter = Character.mock
+        let expectedDeath = Death.mock
 
         mockClient.quoteToReturn = expectedQuote
         mockClient.characterToReturn = expectedCharacter
