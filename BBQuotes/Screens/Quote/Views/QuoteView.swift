@@ -12,11 +12,11 @@ struct QuoteView: View {
     // MARK: - Variables
 
     let production: Production
-    let viewModel: ViewModel
+    let viewModel: QuoteViewModel
     @ObserveInjection var injection
     @State private var showCharacterView = false
 
-    init(production: Production, viewModel: ViewModel = ViewModel()) {
+    init(production: Production, viewModel: QuoteViewModel = QuoteViewModel()) {
         self.production = production
         self.viewModel = viewModel
 

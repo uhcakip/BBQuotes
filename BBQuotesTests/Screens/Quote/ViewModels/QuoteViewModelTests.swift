@@ -1,5 +1,5 @@
 //
-//  ViewModelTests.swift
+//  QuoteViewModelTests.swift
 //  BBQuotesTests
 //
 //  Created by Yuna Chou on 2024/9/23.
@@ -38,14 +38,14 @@ class MockAPIClient: APIClientProtocol {
     }
 }
 
-class ViewModelTests: XCTestCase {
-    private var sut: ViewModel!
+class QuoteViewModelTests: XCTestCase {
+    private var sut: QuoteViewModel!
     private var mockClient: MockAPIClient!
 
     override func setUp() {
         super.setUp()
         mockClient = MockAPIClient()
-        sut = ViewModel(client: mockClient)
+        sut = QuoteViewModel(client: mockClient)
     }
 
     override func tearDown() {
@@ -79,7 +79,7 @@ class ViewModelTests: XCTestCase {
 
         await sut.fetchData(for: .breakingBad)
 
-        XCTAssertEqual(sut.fetchStatus, ViewModel.DataFetchStatus.success)
+        XCTAssertEqual(sut.fetchStatus, QuoteViewModel.DataFetchStatus.success)
         XCTAssertEqual(sut.quote, expectedQuote)
         XCTAssertEqual(sut.character, expectedCharacter)
     }

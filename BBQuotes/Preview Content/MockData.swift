@@ -45,9 +45,9 @@ extension Death {
     )
 }
 
-extension ViewModel {
-    static var preview: ViewModel {
-        let viewModel = ViewModel()
+extension QuoteViewModel {
+    static var preview: QuoteViewModel {
+        let viewModel = QuoteViewModel()
         viewModel.quote = .mock
         viewModel.character = .mock
         viewModel.fetchStatus = .success
