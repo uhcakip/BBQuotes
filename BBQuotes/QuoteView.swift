@@ -44,7 +44,7 @@ struct QuoteView: View {
                 .foregroundStyle(.white)
                 .padding()
                 .background(Color(production.buttonColorName))
-                .clipShape(RoundedRectangle(cornerRadius: 7))
+                .clipShape(.rect(cornerRadius: 7))
                 .shadow(color: Color(production.shadowColorName), radius: 5)
         }
     }
@@ -57,7 +57,7 @@ struct QuoteView: View {
                 .multilineTextAlignment(.center)
                 .padding()
                 .background(.black.opacity(0.5))
-                .clipShape(RoundedRectangle(cornerRadius: 25))
+                .clipShape(.rect(cornerRadius: 25))
                 .padding(.horizontal)
         } else {
             EmptyView()
@@ -83,7 +83,7 @@ struct QuoteView: View {
                     .background(.ultraThinMaterial)
             }
             .frame(width: size.width / 1.1, height: size.height / 1.8)
-            .clipShape(RoundedRectangle(cornerRadius: 50))
+            .clipShape(.rect(cornerRadius: 50))
             .onTapGesture {
                 showCharacterView = true
             }
