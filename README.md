@@ -1,0 +1,89 @@
+<div align="center">
+
+<h1>BBQuotes</h1>
+
+  [![Swift 5.10](https://img.shields.io/badge/Swift-5.10-orange?logo=swift)](https://developer.apple.com/swift/)
+  [![Xcode 15.4](https://img.shields.io/badge/Xcode-15.4-007ACC?logo=Xcode&logoColor=blue)](https://developer.apple.com/xcode/)
+  [![iOS 17](https://img.shields.io/badge/iOS-17-363737?logo=apple&logoColor=white)](https://developer.apple.com/ios/)
+
+  <h3>⚠️ SPOILER ALERT ⚠️</h3>
+  <p>This app contains information about characters and events from Breaking Bad, Better Call Saul, and El Camino.</p>
+  <p>...</p>
+  <p>...</p>
+  <p>...</p>
+  <p>...</p>
+  <p>...</p>
+  <br>
+  <div>
+    <img src="_Demo/1-mockup-breaking-bad.png" width="30%" alt="Breaking Bad">&nbsp;&nbsp;&nbsp;
+    <img src="_Demo/2-mockup-better-call-saul.png" width="30%" alt="Better Call Saul">&nbsp;&nbsp;&nbsp;
+    <img src="_Demo/3-mockup-el-camino.png" width="30%" alt="El Camino">
+    <br><br>
+    <img src="_Demo/4-mockup-character-detail.png" width="30%" alt="Character Detail">&nbsp;&nbsp;&nbsp;
+    <img src="_Demo/5-mockup-character-detail-status.png" width="30%" alt="Character Detail Status">
+  </div>
+
+</div>
+
+## Overview
+BBQuotes is a SwiftUI application that showcases quotes from the Breaking Bad universe, including Breaking Bad, Better Call Saul, and El Camino. The app allows users to view random quotes, character information, and explore details about their favorite characters from these iconic TV series.
+
+Based on the Udemy course [iOS 18, SwiftUI 6, & Swift 6: Build iOS Apps From Scratch](https://www.udemy.com/course/ios-15-app-development-with-swiftui-3-and-swift-5/), **with the following implementations by myself**:
+
+- Integration of additional [packages](#packages) to extend capabilities and streamline development
+- [Project structure](#project-structure) for better organization
+- Unit tests for API client and view models
+- Enhanced API client with generic `makeRequest` function
+- Improved error handling with custom `APIError` messages
+
+## Features
+- Fetch and display random quotes from Breaking Bad, Better Call Saul, and El Camino
+- View detailed character information, including images, occupations, and status
+- Toggle between different TV series
+- Error handling and user feedback
+
+## Demo
+<img src="_Demo/demo.gif" alt="BBQuotes Demo">
+
+## Project Structure
+```
+.
+├── BBQuotes
+│   ├── BBQuotesApp.swift
+│   ├── Clients
+│   │   └── APIClient.swift
+│   ├── Models
+│   │   ├── Character.swift
+│   │   ├── Death.swift
+│   │   ├── Production.swift
+│   │   └── Quote.swift
+│   ├── Screens
+│   │   ├── Character
+│   │   │   └── Views
+│   │   │       └── CharacterView.swift
+│   │   ├── ContentView.swift
+│   │   └── Quote
+│   │       ├── ViewModels
+│   │       │   └── QuoteViewModel.swift
+│   │       └── Views
+│   │           └── QuoteView.swift
+│   └── Utils
+│       └── MockData.swift
+├── BBQuotesTests
+│   ├── Clients
+│   │   ├── APIClientIntegrationTests.swift
+│   │   └── APIClientTests.swift
+│   ├── Models
+│   │   └── ProductionTests.swift
+│   └── Screens
+│       └── Quote
+│           └── ViewModels
+│               └── QuoteViewModelTests.swift
+```
+
+## Packages
+This project uses Swift Package Manager (SPM) for dependency management. The following packages are included:
+
+- [Inject](https://github.com/krzysztofzablocki/Inject) - Used for hot reloading during development
+- [SwiftLint](https://github.com/realm/SwiftLint) - Used for code linting
+- [SwiftFormat](https://github.com/nicklockwood/SwiftFormat) - Used for code formatting
