@@ -32,9 +32,9 @@ Based on the Udemy course [iOS 18, SwiftUI 6, & Swift 6: Build iOS Apps From Scr
 
 - Integration of additional [packages](#packages) to extend capabilities and streamline development
 - [Project structure](#project-structure) for better organization
-- Unit tests for API client and view models
-- Enhanced API client with generic `makeRequest` function
-- Improved error handling with custom `APIError` messages
+- [Unit tests](https://github.com/uhcakip/BBQuotes/tree/master/BBQuotesTests) for API client and view models
+- Enhanced API client with [generic `makeRequest` function](https://github.com/uhcakip/BBQuotes/blob/12f7134b8e4e49b191049caba347f5b3e2a7d0a8/BBQuotes/Clients/APIClient.swift#L38)
+- Improved error handling with [custom `APIError` messages](https://github.com/uhcakip/BBQuotes/blob/12f7134b8e4e49b191049caba347f5b3e2a7d0a8/BBQuotes/Clients/APIClient.swift#L70)
 
 ## Features
 - Fetch and display random quotes from Breaking Bad, Better Call Saul, and El Camino
