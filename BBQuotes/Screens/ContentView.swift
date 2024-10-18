@@ -16,19 +16,19 @@ struct ContentView: View {
             QuoteView(production: .breakingBad)
                 .toolbarBackground(.visible, for: .tabBar)
                 .tabItem {
-                    Label("Breaking Bad", systemImage: "tortoise")
+                    Label(Production.breakingBad.rawValue, systemImage: "tortoise")
                 }
 
             QuoteView(production: .betterCallSaul)
                 .toolbarBackground(.visible, for: .tabBar)
                 .tabItem {
-                    Label("Better Call Saul", systemImage: "briefcase")
+                    Label(Production.betterCallSaul.rawValue, systemImage: "briefcase")
                 }
 
             QuoteView(production: .elCamino)
                 .toolbarBackground(.visible, for: .tabBar)
                 .tabItem {
-                    Label("El Camino", systemImage: "car")
+                    Label(Production.elCamino.rawValue, systemImage: "car")
                 }
         }
         .preferredColorScheme(.dark)
