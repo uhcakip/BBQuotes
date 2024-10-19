@@ -17,11 +17,8 @@ struct Episode: Decodable, Equatable {
     let airDate: String
 
     var seasonEpisode: String {
-        var episode = String(self.episode)
-        let season = episode.removeFirst()
-        if episode.prefix(1) == "0" {
-            episode = String(episode.removeLast())
-        }
+        let season = episode / 100
+        let episode = episode % 100
         return "Season \(season) Episode \(episode)"
     }
 }
