@@ -56,7 +56,7 @@ class QuoteViewModelTests: XCTestCase {
         mockClient.deathToReturn = expectedDeath
         expectedCharacter.death = expectedDeath
 
-        await sut.fetchData(for: .breakingBad)
+        await sut.fetchQuoteData(for: .breakingBad)
 
         XCTAssertEqual(sut.fetchStatus, QuoteViewModel.DataFetchStatus.success)
         XCTAssertEqual(sut.quote, expectedQuote)
@@ -67,7 +67,7 @@ class QuoteViewModelTests: XCTestCase {
         let expectedError = NSError(domain: "TestError", code: 0, userInfo: nil)
         mockClient.errorToThrow = expectedError
 
-        await sut.fetchData(for: .breakingBad)
+        await sut.fetchQuoteData(for: .breakingBad)
 
         XCTAssertTrue(sut.fetchStatus == .failure(error: expectedError))
         XCTAssertNil(sut.quote)

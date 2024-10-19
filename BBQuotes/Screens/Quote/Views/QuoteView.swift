@@ -21,7 +21,7 @@ struct QuoteView: View {
         self.viewModel = viewModel
 
         Task {
-            await viewModel.fetchData(for: production)
+            await viewModel.fetchQuoteData(for: production)
         }
     }
 
@@ -36,7 +36,7 @@ struct QuoteView: View {
     private var fetchButton: some View {
         Button {
             Task {
-                await viewModel.fetchData(for: production)
+                await viewModel.fetchQuoteData(for: production)
             }
         } label: {
             Text("Get Random Quote")

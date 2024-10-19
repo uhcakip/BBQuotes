@@ -35,7 +35,7 @@ import Foundation
         self.client = client
     }
 
-    func fetchData(for production: Production) async {
+    func fetchQuoteData(for production: Production) async {
         fetchStatus = .fetching
         do {
             quote = try await client.fetchQuote(from: production)
