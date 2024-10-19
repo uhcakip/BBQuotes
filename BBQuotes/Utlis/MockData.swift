@@ -45,6 +45,18 @@ extension Death {
     )
 }
 
+extension Episode {
+    static let mock = Episode(
+        episode: 101,
+        title: "Pilot",
+        image: URL(string: "https://static.wikia.nocookie.net/breakingbad/images/b/b1/BB_101_S.jpg/revision/latest?cb=20170418193804")!,
+        synopsis: "Unassuming high school chemistry teacher Walter White discovers he has lung cancer. Desperate to secure his family's financial future and finally free from the fear that had always inhibited him, Walt teams up with a former student to turn a used RV into a mobile drug lab.",
+        writtenBy: "Vince Gilligan",
+        directedBy: "Vince Gilligan",
+        airDate: "01-20-2008"
+    )
+}
+
 extension QuoteViewModel {
     static var preview: QuoteViewModel {
         let viewModel = QuoteViewModel()
