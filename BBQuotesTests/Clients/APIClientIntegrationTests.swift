@@ -39,6 +39,7 @@ final class APIClientIntegrationTests: XCTestCase {
 
     func testFetchDeathIntegration() async throws {
         let death = try await client.fetchDeath(for: characterName)
+
         guard let death else {
             XCTFail("Death should not be nil")
             return
