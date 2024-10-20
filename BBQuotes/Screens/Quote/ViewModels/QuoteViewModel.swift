@@ -8,22 +8,11 @@
 import Foundation
 
 @Observable class QuoteViewModel {
-    enum DataFetchStatus: Equatable {
+    enum DataFetchStatus {
         case idle
         case fetching
         case success
         case failure(error: Error)
-
-        static func == (lhs: Self, rhs: Self) -> Bool {
-            switch (lhs, rhs) {
-            case (.idle, .idle), (.fetching, .fetching), (.success, .success):
-                true
-            case let (.failure(error1), .failure(error2)):
-                error1.localizedDescription == error2.localizedDescription
-            default:
-                false
-            }
-        }
     }
 
     let client: APIClientProtocol

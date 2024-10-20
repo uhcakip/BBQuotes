@@ -64,7 +64,7 @@ class QuoteViewModelTests: XCTestCase {
 
         await sut.fetchQuoteData(for: .breakingBad)
 
-        XCTAssertEqual(sut.fetchStatus, QuoteViewModel.DataFetchStatus.success)
+        XCTAssertEqual(String(describing: sut.fetchStatus), String(describing: QuoteViewModel.DataFetchStatus.success))
         XCTAssertEqual(sut.quote, expectedQuote)
         XCTAssertEqual(sut.character, expectedCharacter)
     }
@@ -75,7 +75,12 @@ class QuoteViewModelTests: XCTestCase {
 
         await sut.fetchQuoteData(for: .breakingBad)
 
-        XCTAssertTrue(sut.fetchStatus == .failure(error: expectedError))
+        if case let .failure(error) = sut.fetchStatus {
+            XCTAssertEqual(error as NSError, expectedError)
+        } else {
+            XCTFail("Expected .failure status, but got \(sut.fetchStatus)")
+        }
+
         XCTAssertNil(sut.quote)
         XCTAssertNil(sut.character)
     }
@@ -86,7 +91,7 @@ class QuoteViewModelTests: XCTestCase {
 
         await sut.fetchEpisodeData(for: .breakingBad)
 
-        XCTAssertEqual(sut.fetchStatus, .success)
+        XCTAssertEqual(String(describing: sut.fetchStatus), String(describing: QuoteViewModel.DataFetchStatus.success))
         XCTAssertEqual(sut.episode, expectedEpisode)
     }
 
@@ -96,7 +101,12 @@ class QuoteViewModelTests: XCTestCase {
 
         await sut.fetchEpisodeData(for: .breakingBad)
 
-        XCTAssertEqual(sut.fetchStatus, .failure(error: expectedError))
+        if case let .failure(error) = sut.fetchStatus {
+            XCTAssertEqual(error as NSError, expectedError)
+        } else {
+            XCTFail("Expected .failure status, but got \(sut.fetchStatus)")
+        }
+
         XCTAssertNil(sut.episode)
     }
 }
