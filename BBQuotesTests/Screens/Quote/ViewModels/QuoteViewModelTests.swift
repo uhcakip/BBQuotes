@@ -9,30 +9,30 @@
 import XCTest
 
 class MockAPIClient: APIClientProtocol {
-    var quoteToReturn: Quote?
-    var characterToReturn: Character?
-    var deathToReturn: Death?
-    var episodeToReturn: Episode?
-    var errorToThrow: Error?
+    var quote: Quote?
+    var character: Character?
+    var death: Death?
+    var episode: Episode?
+    var error: Error?
 
     func fetchQuote(from _: Production) async throws -> Quote {
-        if let error = errorToThrow { throw error }
-        return quoteToReturn ?? Quote(quote: "", character: "")
+        if let error { throw error }
+        return quote ?? Quote(quote: "", character: "")
     }
 
     func fetchCharacter(_: String) async throws -> Character? {
-        if let error = errorToThrow { throw error }
-        return characterToReturn
+        if let error { throw error }
+        return character
     }
 
     func fetchDeath(for _: String) async throws -> Death? {
-        if let error = errorToThrow { throw error }
-        return deathToReturn
+        if let error { throw error }
+        return death
     }
 
     func fetchEpisode(from _: Production) async throws -> Episode? {
-        if let error = errorToThrow { throw error }
-        return episodeToReturn
+        if let error { throw error }
+        return episode
     }
 }
 
@@ -57,9 +57,9 @@ class QuoteViewModelTests: XCTestCase {
         var expectedCharacter = Character.mock
         let expectedDeath = Death.mock
 
-        mockClient.quoteToReturn = expectedQuote
-        mockClient.characterToReturn = expectedCharacter
-        mockClient.deathToReturn = expectedDeath
+        mockClient.quote = expectedQuote
+        mockClient.character = expectedCharacter
+        mockClient.death = expectedDeath
         expectedCharacter.death = expectedDeath
 
         await sut.fetchQuoteData(for: .breakingBad)
@@ -71,7 +71,7 @@ class QuoteViewModelTests: XCTestCase {
 
     func testFetchDataFailure() async {
         let expectedError = NSError(domain: "TestError", code: 0, userInfo: nil)
-        mockClient.errorToThrow = expectedError
+        mockClient.error = expectedError
 
         await sut.fetchQuoteData(for: .breakingBad)
 
@@ -87,7 +87,7 @@ class QuoteViewModelTests: XCTestCase {
 
     func testFetchEpisodeDataSuccess() async {
         let expectedEpisode = Episode.mock
-        mockClient.episodeToReturn = expectedEpisode
+        mockClient.episode = expectedEpisode
 
         await sut.fetchEpisodeData(for: .breakingBad)
 
@@ -97,7 +97,7 @@ class QuoteViewModelTests: XCTestCase {
 
     func testFetchEpisodeDataFailure() async {
         let expectedError = NSError(domain: "TestError", code: 0, userInfo: nil)
-        mockClient.errorToThrow = expectedError
+        mockClient.error = expectedError
 
         await sut.fetchEpisodeData(for: .breakingBad)
 
