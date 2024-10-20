@@ -29,6 +29,7 @@ import Foundation
     let client: APIClientProtocol
     var quote: Quote?
     var character: Character?
+    var episode: Episode?
     var fetchStatus = DataFetchStatus.idle
 
     init(client: APIClientProtocol = APIClient()) {
@@ -43,6 +44,16 @@ import Foundation
                 character = try await client.fetchCharacter(characterName)
                 character?.death = try await client.fetchDeath(for: characterName)
             }
+            fetchStatus = .success
+        } catch {
+            fetchStatus = .failure(error: error)
+        }
+    }
+
+    func fetchEpisodeData(for production: Production) async {
+        fetchStatus = .fetching
+        do {
+            episode = try await client.fetchEpisode(from: production)
             fetchStatus = .success
         } catch {
             fetchStatus = .failure(error: error)

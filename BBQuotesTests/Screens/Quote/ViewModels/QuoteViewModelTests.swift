@@ -12,6 +12,7 @@ class MockAPIClient: APIClientProtocol {
     var quoteToReturn: Quote?
     var characterToReturn: Character?
     var deathToReturn: Death?
+    var episodeToReturn: Episode?
     var errorToThrow: Error?
 
     func fetchQuote(from _: Production) async throws -> Quote {
@@ -27,6 +28,11 @@ class MockAPIClient: APIClientProtocol {
     func fetchDeath(for _: String) async throws -> Death? {
         if let error = errorToThrow { throw error }
         return deathToReturn
+    }
+
+    func fetchEpisode(from _: Production) async throws -> Episode? {
+        if let error = errorToThrow { throw error }
+        return episodeToReturn
     }
 }
 
@@ -72,5 +78,25 @@ class QuoteViewModelTests: XCTestCase {
         XCTAssertTrue(sut.fetchStatus == .failure(error: expectedError))
         XCTAssertNil(sut.quote)
         XCTAssertNil(sut.character)
+    }
+
+    func testFetchEpisodeDataSuccess() async {
+        let expectedEpisode = Episode.mock
+        mockClient.episodeToReturn = expectedEpisode
+
+        await sut.fetchEpisodeData(for: .breakingBad)
+
+        XCTAssertEqual(sut.fetchStatus, .success)
+        XCTAssertEqual(sut.episode, expectedEpisode)
+    }
+
+    func testFetchEpisodeDataFailure() async {
+        let expectedError = NSError(domain: "TestError", code: 0, userInfo: nil)
+        mockClient.errorToThrow = expectedError
+
+        await sut.fetchEpisodeData(for: .breakingBad)
+
+        XCTAssertEqual(sut.fetchStatus, .failure(error: expectedError))
+        XCTAssertNil(sut.episode)
     }
 }
