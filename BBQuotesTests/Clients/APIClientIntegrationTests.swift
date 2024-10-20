@@ -50,4 +50,21 @@ final class APIClientIntegrationTests: XCTestCase {
         XCTAssertFalse(death.details.isEmpty)
         XCTAssertFalse(death.lastWords.isEmpty)
     }
+
+    func testFetchEpisodesIntegration() async throws {
+        let episode = try await client.fetchEpisode(from: .breakingBad)
+
+        guard let episode else {
+            XCTFail("Episode should not be nil")
+            return
+        }
+
+        XCTAssertGreaterThan(episode.episode, 0)
+        XCTAssertFalse(episode.title.isEmpty)
+        XCTAssertFalse(episode.image.absoluteString.isEmpty)
+        XCTAssertFalse(episode.synopsis.isEmpty)
+        XCTAssertFalse(episode.writtenBy.isEmpty)
+        XCTAssertFalse(episode.directedBy.isEmpty)
+        XCTAssertFalse(episode.airDate.isEmpty)
+    }
 }

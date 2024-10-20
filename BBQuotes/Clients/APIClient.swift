@@ -17,6 +17,7 @@ protocol APIClientProtocol {
     func fetchQuote(from production: Production) async throws -> Quote
     func fetchCharacter(_ name: String) async throws -> Character?
     func fetchDeath(for name: String) async throws -> Death?
+    func fetchEpisode(from production: Production) async throws -> Episode?
 }
 
 enum Endpoint {
@@ -24,6 +25,7 @@ enum Endpoint {
     static let quotes = baseURL.appending(path: "quotes/random")
     static let characters = baseURL.appending(path: "characters")
     static let deaths = baseURL.appending(path: "deaths")
+    static let episodes = baseURL.appending(path: "episodes")
 }
 
 struct APIClient: APIClientProtocol {
@@ -60,6 +62,12 @@ struct APIClient: APIClientProtocol {
         let url = Endpoint.deaths
         let deaths: [Death] = try await makeRequest(from: url)
         return deaths.first { $0.character == character }
+    }
+
+    func fetchEpisode(from production: Production) async throws -> Episode? {
+        let url = Endpoint.episodes.appending(queryItems: [.init(name: "production", value: production.rawValue)])
+        let episodes: [Episode] = try await makeRequest(from: url)
+        return episodes.randomElement()
     }
 }
 

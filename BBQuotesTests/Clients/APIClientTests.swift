@@ -76,4 +76,17 @@ final class APIClientTests: XCTestCase {
             XCTAssertEqual(error?.localizedDescription, "Something went wrong. Please try again later.")
         }
     }
+
+    func testFetchEpisodeBadResponse() async {
+        mockSession.response = HTTPURLResponse(url: url, statusCode: 500, httpVersion: nil, headerFields: nil)
+
+        do {
+            _ = try await sut.fetchEpisode(from: .breakingBad)
+            XCTFail("Expected badResponse error")
+        } catch {
+            let error = error as? APIError
+            XCTAssertEqual(error, .badResponse)
+            XCTAssertEqual(error?.localizedDescription, "Something went wrong. Please try again later.")
+        }
+    }
 }
