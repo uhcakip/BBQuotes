@@ -13,19 +13,19 @@ struct ContentView: View {
 
     var body: some View {
         TabView {
-            QuoteView(production: .breakingBad)
+            QuoteEpisodeView(production: .breakingBad)
                 .toolbarBackground(.visible, for: .tabBar)
                 .tabItem {
                     Label(Production.breakingBad.rawValue, systemImage: "tortoise")
                 }
 
-            QuoteView(production: .betterCallSaul)
+            QuoteEpisodeView(production: .betterCallSaul)
                 .toolbarBackground(.visible, for: .tabBar)
                 .tabItem {
                     Label(Production.betterCallSaul.rawValue, systemImage: "briefcase")
                 }
 
-            QuoteView(production: .elCamino)
+            QuoteEpisodeView(production: .elCamino)
                 .toolbarBackground(.visible, for: .tabBar)
                 .tabItem {
                     Label(Production.elCamino.rawValue, systemImage: "car")

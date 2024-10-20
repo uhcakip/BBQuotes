@@ -1,5 +1,5 @@
 //
-//  QuoteViewModel.swift
+//  QuoteEpisodeViewModel.swift
 //  BBQuotes
 //
 //  Created by Yuna Chou on 2024/9/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-@Observable class QuoteViewModel {
+@Observable class QuoteEpisodeViewModel {
     enum DataFetchStatus {
         case idle
         case fetching

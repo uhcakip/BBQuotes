@@ -1,5 +1,5 @@
 //
-//  QuoteView.swift
+//  QuoteEpisodeView.swift
 //  BBQuotes
 //
 //  Created by Yuna Chou on 2024/9/23.
@@ -8,15 +8,15 @@
 import Inject
 import SwiftUI
 
-struct QuoteView: View {
+struct QuoteEpisodeView: View {
     // MARK: - Variables
 
     let production: Production
-    let viewModel: QuoteViewModel
+    let viewModel: QuoteEpisodeViewModel
     @ObserveInjection var injection
     @State private var showCharacterView = false
 
-    init(production: Production, viewModel: QuoteViewModel = QuoteViewModel()) {
+    init(production: Production, viewModel: QuoteEpisodeViewModel = QuoteEpisodeViewModel()) {
         self.production = production
         self.viewModel = viewModel
 
@@ -136,6 +136,6 @@ struct QuoteView: View {
 }
 
 #Preview {
-    QuoteView(production: .breakingBad, viewModel: .preview)
+    QuoteEpisodeView(production: .breakingBad, viewModel: .preview)
         .preferredColorScheme(.dark)
 }

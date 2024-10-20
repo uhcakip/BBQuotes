@@ -57,9 +57,9 @@ extension Episode {
     )
 }
 
-extension QuoteViewModel {
-    static var preview: QuoteViewModel {
-        let viewModel = QuoteViewModel()
+extension QuoteEpisodeViewModel {
+    static var preview: QuoteEpisodeViewModel {
+        let viewModel = QuoteEpisodeViewModel()
         viewModel.quote = .mock
         viewModel.character = .mock
         viewModel.fetchStatus = .success

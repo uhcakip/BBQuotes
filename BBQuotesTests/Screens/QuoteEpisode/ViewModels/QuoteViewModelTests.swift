@@ -37,13 +37,13 @@ class MockAPIClient: APIClientProtocol {
 }
 
 class QuoteViewModelTests: XCTestCase {
-    private var sut: QuoteViewModel!
+    private var sut: QuoteEpisodeViewModel!
     private var mockClient: MockAPIClient!
 
     override func setUp() {
         super.setUp()
         mockClient = MockAPIClient()
-        sut = QuoteViewModel(client: mockClient)
+        sut = QuoteEpisodeViewModel(client: mockClient)
     }
 
     override func tearDown() {
@@ -64,7 +64,7 @@ class QuoteViewModelTests: XCTestCase {
 
         await sut.fetchQuoteData(for: .breakingBad)
 
-        XCTAssertEqual(String(describing: sut.fetchStatus), String(describing: QuoteViewModel.DataFetchStatus.success))
+        XCTAssertEqual(String(describing: sut.fetchStatus), String(describing: QuoteEpisodeViewModel.DataFetchStatus.success))
         XCTAssertEqual(sut.quote, expectedQuote)
         XCTAssertEqual(sut.character, expectedCharacter)
     }
@@ -91,7 +91,7 @@ class QuoteViewModelTests: XCTestCase {
 
         await sut.fetchEpisodeData(for: .breakingBad)
 
-        XCTAssertEqual(String(describing: sut.fetchStatus), String(describing: QuoteViewModel.DataFetchStatus.success))
+        XCTAssertEqual(String(describing: sut.fetchStatus), String(describing: QuoteEpisodeViewModel.DataFetchStatus.success))
         XCTAssertEqual(sut.episode, expectedEpisode)
     }
 
