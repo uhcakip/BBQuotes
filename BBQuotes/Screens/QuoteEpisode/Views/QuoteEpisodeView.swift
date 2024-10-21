@@ -5,7 +5,6 @@
 //  Created by Yuna Chou on 2024/9/23.
 //
 
-import Inject
 import SwiftUI
 
 struct QuoteEpisodeView: View {
@@ -13,7 +12,6 @@ struct QuoteEpisodeView: View {
 
     let production: Production
     let viewModel: QuoteEpisodeViewModel
-    @ObserveInjection var injection
     @State private var showCharacterView = false
 
     init(production: Production, viewModel: QuoteEpisodeViewModel = QuoteEpisodeViewModel()) {
