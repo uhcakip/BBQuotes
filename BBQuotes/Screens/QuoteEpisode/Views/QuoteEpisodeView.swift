@@ -61,7 +61,7 @@ struct QuoteEpisodeView: View {
                             EmptyView()
                         case .fetching:
                             ProgressView()
-                        case .success:
+                        case .successQuote:
                             QuoteView(
                                 quote: viewModel.quote,
                                 character: viewModel.character,
@@ -69,16 +69,27 @@ struct QuoteEpisodeView: View {
                                 geo: geo,
                                 showCharacterView: $showCharacterView
                             )
+                        case .successEpisode:
+                            EpisodeView(episode: viewModel.episode)
                         case let .failure(error):
                             Text(error.localizedDescription)
                         }
 
-                        Spacer()
+                        Spacer(minLength: 20)
                     }
 
-                    fetchButton(text: "Get Random Quote") {
-                        await viewModel.fetchQuoteData(for: production)
+                    HStack {
+                        fetchButton(text: "Get Random Quote") {
+                            await viewModel.fetchQuoteData(for: production)
+                        }
+
+                        Spacer()
+
+                        fetchButton(text: "Get Random Episode") {
+                            await viewModel.fetchEpisodeData(for: production)
+                        }
                     }
+                    .padding(.horizontal, 30)
 
                     Spacer(minLength: 95)
                 }
