@@ -33,13 +33,13 @@ struct QuoteEpisodeView: View {
             .frame(width: size.width * 2.7, height: size.height * 1.2)
     }
 
-    private var fetchButton: some View {
+    private func fetchButton(text: String, fetch: @escaping () async -> Void) -> some View {
         Button {
             Task {
-                await viewModel.fetchQuoteData(for: production)
+                await fetch()
             }
         } label: {
-            Text("Get Random Quote")
+            Text(text)
                 .font(.title3)
                 .foregroundStyle(.white)
                 .padding()
@@ -78,7 +78,10 @@ struct QuoteEpisodeView: View {
                         Spacer()
                     }
 
-                    fetchButton
+                    fetchButton(text: "Get Random Quote") {
+                        await viewModel.fetchQuoteData(for: production)
+                    }
+
                     Spacer(minLength: 95)
                 }
                 .frame(width: geo.size.width, height: geo.size.height)
