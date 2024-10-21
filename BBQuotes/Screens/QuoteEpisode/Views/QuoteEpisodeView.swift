@@ -49,50 +49,6 @@ struct QuoteEpisodeView: View {
         }
     }
 
-    @ViewBuilder private var quoteContent: some View {
-        if let quote = viewModel.quote {
-            Text(quote.quote)
-                .minimumScaleFactor(0.5)
-                .foregroundStyle(.white)
-                .multilineTextAlignment(.center)
-                .padding()
-                .background(.black.opacity(0.5))
-                .clipShape(.rect(cornerRadius: 25))
-                .padding(.horizontal)
-        } else {
-            EmptyView()
-        }
-    }
-
-    @ViewBuilder private func characterContent(geoSize size: CGSize) -> some View {
-        if let character = viewModel.character {
-            ZStack(alignment: .bottom) {
-                AsyncImage(url: character.images.first) { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                } placeholder: {
-                    ProgressView()
-                }
-                .frame(width: size.width / 1.1, height: size.height / 1.8)
-
-                Text(character.name)
-                    .foregroundStyle(.white)
-                    .padding(10)
-                    .frame(maxWidth: .infinity)
-                    .background(.ultraThinMaterial)
-            }
-            .frame(width: size.width / 1.1, height: size.height / 1.8)
-            .clipShape(.rect(cornerRadius: 50))
-            .onTapGesture {
-                showCharacterView = true
-            }
-            .accessibilityAddTraits(.isButton)
-        } else {
-            EmptyView()
-        }
-    }
-
     var body: some View {
         GeometryReader { geo in
             ZStack {
@@ -108,8 +64,13 @@ struct QuoteEpisodeView: View {
                         case .fetching:
                             ProgressView()
                         case .success:
-                            quoteContent
-                            characterContent(geoSize: geo.size)
+                            QuoteView(
+                                quote: viewModel.quote,
+                                character: viewModel.character,
+                                production: production,
+                                geo: geo,
+                                showCharacterView: $showCharacterView
+                            )
                         case let .failure(error):
                             Text(error.localizedDescription)
                         }

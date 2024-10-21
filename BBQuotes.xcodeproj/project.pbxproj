@@ -18,6 +18,7 @@
 		E84C182F2CA5CFA400378F83 /* Production.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84C182E2CA5CFA400378F83 /* Production.swift */; };
 		E84C18312CA6803500378F83 /* ProductionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E84C18302CA6803500378F83 /* ProductionTests.swift */; };
 		E876D6AE2C995C4B00994F0C /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E876D6AD2C995C4B00994F0C /* APIClient.swift */; };
+		E88602C32CC50DDB001368F1 /* QuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E88602C22CC50DDB001368F1 /* QuoteView.swift */; };
 		E89897B52CAA6D39009B8323 /* CharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89897B42CAA6D39009B8323 /* CharacterView.swift */; };
 		E89897BB2CABE2E6009B8323 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E89897BA2CABE2E6009B8323 /* MockData.swift */; };
 		E8C19E682CA12E4F0095F312 /* QuoteEpisodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8C19E672CA12E4F0095F312 /* QuoteEpisodeViewModel.swift */; };
@@ -51,6 +52,7 @@
 		E84C182E2CA5CFA400378F83 /* Production.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Production.swift; sourceTree = "<group>"; };
 		E84C18302CA6803500378F83 /* ProductionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductionTests.swift; sourceTree = "<group>"; };
 		E876D6AD2C995C4B00994F0C /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		E88602C22CC50DDB001368F1 /* QuoteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuoteView.swift; path = BBQuotes/Screens/QuoteEpisode/Views/QuoteView.swift; sourceTree = SOURCE_ROOT; };
 		E89897B42CAA6D39009B8323 /* CharacterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterView.swift; sourceTree = "<group>"; };
 		E89897BA2CABE2E6009B8323 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		E8AE7C362C9A945100259CDC /* BBQuotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BBQuotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				E8DBE93B2CA164CF003C09FA /* QuoteEpisodeView.swift */,
+				E88602C22CC50DDB001368F1 /* QuoteView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				E84C182F2CA5CFA400378F83 /* Production.swift in Sources */,
 				E89897B52CAA6D39009B8323 /* CharacterView.swift in Sources */,
 				E8E292AB2C96B7D400AC84FA /* Quote.swift in Sources */,
+				E88602C32CC50DDB001368F1 /* QuoteView.swift in Sources */,
 				E81506452C94144F00B7F8F4 /* BBQuotesApp.swift in Sources */,
 				E8C19E682CA12E4F0095F312 /* QuoteEpisodeViewModel.swift in Sources */,
 				E8DBE93C2CA164CF003C09FA /* QuoteEpisodeView.swift in Sources */,
