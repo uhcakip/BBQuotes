@@ -15,7 +15,7 @@ import Foundation
         case failure(error: Error)
     }
 
-    let client: APIClientProtocol
+    private let client: APIClientProtocol
     var quote: Quote?
     var character: Character?
     var episode: Episode?
