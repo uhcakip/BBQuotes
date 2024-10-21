@@ -58,11 +58,15 @@ extension Episode {
 }
 
 extension QuoteEpisodeViewModel {
+    /// Preview data for QuoteEpisodeViewModel
+    ///
+    /// Note: Toggle the `fetchStatus` between `.successQuote` and `.successEpisode`
+    /// to see QuoteView and EpisodeView in QuoteEpisodeView
     static var preview: QuoteEpisodeViewModel {
         let viewModel = QuoteEpisodeViewModel()
         viewModel.quote = .mock
         viewModel.character = .mock
-        viewModel.fetchStatus = .success
+        viewModel.fetchStatus = .successQuote
         return viewModel
     }
 }

@@ -11,7 +11,8 @@ import Foundation
     enum DataFetchStatus {
         case idle
         case fetching
-        case success
+        case successQuote
+        case successEpisode
         case failure(error: Error)
     }
 
@@ -33,7 +34,7 @@ import Foundation
                 character = try await client.fetchCharacter(characterName)
                 character?.death = try await client.fetchDeath(for: characterName)
             }
-            fetchStatus = .success
+            fetchStatus = .successQuote
         } catch {
             fetchStatus = .failure(error: error)
         }
@@ -43,7 +44,7 @@ import Foundation
         fetchStatus = .fetching
         do {
             episode = try await client.fetchEpisode(from: production)
-            fetchStatus = .success
+            fetchStatus = .successEpisode
         } catch {
             fetchStatus = .failure(error: error)
         }

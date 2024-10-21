@@ -64,7 +64,7 @@ class QuoteViewModelTests: XCTestCase {
 
         await sut.fetchQuoteData(for: .breakingBad)
 
-        XCTAssertEqual(String(describing: sut.fetchStatus), String(describing: QuoteEpisodeViewModel.DataFetchStatus.success))
+        XCTAssertEqual(String(describing: sut.fetchStatus), String(describing: QuoteEpisodeViewModel.DataFetchStatus.successQuote))
         XCTAssertEqual(sut.quote, expectedQuote)
         XCTAssertEqual(sut.character, expectedCharacter)
     }
@@ -91,7 +91,7 @@ class QuoteViewModelTests: XCTestCase {
 
         await sut.fetchEpisodeData(for: .breakingBad)
 
-        XCTAssertEqual(String(describing: sut.fetchStatus), String(describing: QuoteEpisodeViewModel.DataFetchStatus.success))
+        XCTAssertEqual(String(describing: sut.fetchStatus), String(describing: QuoteEpisodeViewModel.DataFetchStatus.successEpisode))
         XCTAssertEqual(sut.episode, expectedEpisode)
     }
 
