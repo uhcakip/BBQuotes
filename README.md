@@ -20,14 +20,15 @@
     <img src="_Demo/2-mockup-better-call-saul.png" width="30%" alt="Better Call Saul">&nbsp;&nbsp;&nbsp;
     <img src="_Demo/3-mockup-el-camino.png" width="30%" alt="El Camino">
     <br><br>
-    <img src="_Demo/4-mockup-character-detail.png" width="30%" alt="Character Detail">&nbsp;&nbsp;&nbsp;
-    <img src="_Demo/5-mockup-character-detail-status.png" width="30%" alt="Character Detail Status">
+    <img src="_Demo/4-mockup-episode.png" width="30%" alt="Episode">&nbsp;&nbsp;&nbsp;
+    <img src="_Demo/5-mockup-character-detail.png" width="30%" alt="Character Detail">&nbsp;&nbsp;&nbsp;
+    <img src="_Demo/6-mockup-character-detail-status.png" width="30%" alt="Character Detail Status">
   </div>
 
 </div>
 
 ## Overview
-BBQuotes is a SwiftUI application that showcases quotes from the Breaking Bad universe, including Breaking Bad, Better Call Saul, and El Camino. The app allows users to view random quotes, character information, and explore details about their favorite characters from these iconic TV series.
+BBQuotes is a SwiftUI application that showcases quotes and episodes from the Breaking Bad universe, including Breaking Bad, Better Call Saul, and El Camino. The app allows users to view random quotes, character information, explore details about their favorite characters, and get information about random episodes from these iconic TV series.
 
 Based on the Udemy course [iOS 18, SwiftUI 6, & Swift 6: Build iOS Apps From Scratch](https://www.udemy.com/course/ios-15-app-development-with-swiftui-3-and-swift-5/), **with the following implementations by myself**:
 
@@ -36,10 +37,12 @@ Based on the Udemy course [iOS 18, SwiftUI 6, & Swift 6: Build iOS Apps From Scr
 - [Unit tests](https://github.com/uhcakip/BBQuotes/tree/master/BBQuotesTests) for API client and view models
 - Enhanced API client with [generic `makeRequest` function](https://github.com/uhcakip/BBQuotes/blob/12f7134b8e4e49b191049caba347f5b3e2a7d0a8/BBQuotes/Clients/APIClient.swift#L38)
 - Improved error handling with [custom `APIError` messages](https://github.com/uhcakip/BBQuotes/blob/12f7134b8e4e49b191049caba347f5b3e2a7d0a8/BBQuotes/Clients/APIClient.swift#L70)
+- Added feature to fetch and display random episode information
 
 ## Features
 - Fetch and display random quotes from Breaking Bad, Better Call Saul, and El Camino
 - View detailed character information, including images, occupations, and status
+- Fetch and display random episode information, including title, season, episode number, and synopsis
 - Toggle between different TV series
 - Error handling and user feedback
 
@@ -56,6 +59,7 @@ Based on the Udemy course [iOS 18, SwiftUI 6, & Swift 6: Build iOS Apps From Scr
 │   ├── Models
 │   │   ├── Character.swift
 │   │   ├── Death.swift
+│   │   ├── Episode.swift
 │   │   ├── Production.swift
 │   │   └── Quote.swift
 │   ├── Screens
@@ -63,11 +67,13 @@ Based on the Udemy course [iOS 18, SwiftUI 6, & Swift 6: Build iOS Apps From Scr
 │   │   │   └── Views
 │   │   │       └── CharacterView.swift
 │   │   ├── ContentView.swift
-│   │   └── Quote
+│   │   └── QuoteEpisode
 │   │       ├── ViewModels
-│   │       │   └── QuoteViewModel.swift
+│   │       │   └── QuoteEpisodeViewModel.swift
 │   │       └── Views
-│   │           └── QuoteView.swift
+│   │           ├── QuoteView.swift
+│   │           ├── EpisodeView.swift
+│   │           └── QuoteEpisodeView.swift
 │   └── Utils
 │       └── MockData.swift
 ├── BBQuotesTests
@@ -77,9 +83,9 @@ Based on the Udemy course [iOS 18, SwiftUI 6, & Swift 6: Build iOS Apps From Scr
 │   ├── Models
 │   │   └── ProductionTests.swift
 │   └── Screens
-│       └── Quote
+│       └── QuoteEpisode
 │           └── ViewModels
-│               └── QuoteViewModelTests.swift
+│               └── QuoteEpisodeViewModelTests.swift
 ```
 
 ## Packages
