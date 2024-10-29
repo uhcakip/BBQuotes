@@ -17,10 +17,6 @@ struct QuoteEpisodeView: View {
     init(production: Production, viewModel: QuoteEpisodeViewModel = QuoteEpisodeViewModel()) {
         self.production = production
         self.viewModel = viewModel
-
-        Task {
-            await viewModel.fetchQuoteData(for: production)
-        }
     }
 
     // MARK: - Views
@@ -103,6 +99,11 @@ struct QuoteEpisodeView: View {
                 CharacterView(production: production, character: character)
             } else {
                 ProgressView()
+            }
+        }
+        .task {
+            if viewModel.shouldInitialLoad() {
+                await viewModel.fetchQuoteData(for: production)
             }
         }
     }
