@@ -30,14 +30,21 @@
 ## Overview
 BBQuotes is a SwiftUI application that showcases quotes and episodes from the Breaking Bad universe, including Breaking Bad, Better Call Saul, and El Camino. The app allows users to view random quotes, character information, explore details about their favorite characters, and get information about random episodes from these iconic TV series.
 
-Based on the Udemy course [iOS 18, SwiftUI 6, & Swift 6: Build iOS Apps From Scratch](https://www.udemy.com/course/ios-15-app-development-with-swiftui-3-and-swift-5/), **with the following implementations by myself**:
+Based on the Udemy course [iOS 18, SwiftUI 6, & Swift 6: Build iOS Apps From Scratch](https://www.udemy.com/course/ios-15-app-development-with-swiftui-3-and-swift-5/).
+
+### 💡 Custom Implementations
+The following features and improvements were independently developed, extending beyond the course curriculum:
 
 - Integration of additional [packages](#packages) to extend capabilities and streamline development
 - [Project structure](#project-structure) for better organization
 - [Unit tests](https://github.com/uhcakip/BBQuotes/tree/master/BBQuotesTests) for API client and view models
-- Enhanced API client with [generic `makeRequest` function](https://github.com/uhcakip/BBQuotes/blob/12f7134b8e4e49b191049caba347f5b3e2a7d0a8/BBQuotes/Clients/APIClient.swift#L38)
-- Improved error handling with [custom `APIError` messages](https://github.com/uhcakip/BBQuotes/blob/12f7134b8e4e49b191049caba347f5b3e2a7d0a8/BBQuotes/Clients/APIClient.swift#L70)
-- Added feature to fetch and display random episode information
+- Generic API client with [`makeRequest` function](https://github.com/uhcakip/BBQuotes/blob/12f7134b8e4e49b191049caba347f5b3e2a7d0a8/BBQuotes/Clients/APIClient.swift#L38)
+- Custom error handling with [`APIError` messages](https://github.com/uhcakip/BBQuotes/blob/12f7134b8e4e49b191049caba347f5b3e2a7d0a8/BBQuotes/Clients/APIClient.swift#L70)
+- Quote fetching feature on app launch
+
+A performance issue was discovered and fixed:
+
+- [Redundant API calls were being made on app launch and tab switches, causing unnecessary network overhead](https://github.com/uhcakip/BBQuotes/pull/1)
 
 ## Features
 - Fetch and display random quotes from Breaking Bad, Better Call Saul, and El Camino
