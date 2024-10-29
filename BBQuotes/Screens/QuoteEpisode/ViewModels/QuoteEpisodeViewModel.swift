@@ -21,9 +21,15 @@ import Foundation
     var character: Character?
     var episode: Episode?
     var fetchStatus = DataFetchStatus.idle
+    private var isInitialLoad = true
 
     init(client: APIClientProtocol = APIClient()) {
         self.client = client
+    }
+
+    func shouldInitialLoad() -> Bool {
+        defer { isInitialLoad = false }
+        return isInitialLoad
     }
 
     func fetchQuoteData(for production: Production) async {
