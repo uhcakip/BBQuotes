@@ -41,6 +41,7 @@ The following features and improvements were independently developed, extending 
 - Generic API client with [`makeRequest` function](https://github.com/uhcakip/BBQuotes/blob/12f7134b8e4e49b191049caba347f5b3e2a7d0a8/BBQuotes/Clients/APIClient.swift#L38)
 - Custom error handling with [`APIError` messages](https://github.com/uhcakip/BBQuotes/blob/12f7134b8e4e49b191049caba347f5b3e2a7d0a8/BBQuotes/Clients/APIClient.swift#L70)
 - Quote fetching feature on app launch
+- Mock data in Preview Content for SwiftUI previews
 
 A performance issue was discovered and fixed:
 
@@ -60,39 +61,43 @@ A performance issue was discovered and fixed:
 ```
 .
 ├── BBQuotes
-│   ├── BBQuotesApp.swift
-│   ├── Clients
-│   │   └── APIClient.swift
-│   ├── Models
-│   │   ├── Character.swift
-│   │   ├── Death.swift
-│   │   ├── Episode.swift
-│   │   ├── Production.swift
-│   │   └── Quote.swift
-│   ├── Screens
-│   │   ├── Character
-│   │   │   └── Views
-│   │   │       └── CharacterView.swift
-│   │   ├── ContentView.swift
-│   │   └── QuoteEpisode
-│   │       ├── ViewModels
-│   │       │   └── QuoteEpisodeViewModel.swift
-│   │       └── Views
-│   │           ├── QuoteView.swift
-│   │           ├── EpisodeView.swift
-│   │           └── QuoteEpisodeView.swift
-│   └── Utils
-│       └── MockData.swift
-├── BBQuotesTests
-│   ├── Clients
-│   │   ├── APIClientIntegrationTests.swift
-│   │   └── APIClientTests.swift
-│   ├── Models
-│   │   └── ProductionTests.swift
-│   └── Screens
-│       └── QuoteEpisode
-│           └── ViewModels
-│               └── QuoteEpisodeViewModelTests.swift
+│   ├── BBQuotesApp.swift
+│   ├── Clients
+│   │   └── APIClient.swift
+│   ├── Models
+│   │   ├── Character.swift
+│   │   ├── Death.swift
+│   │   ├── Episode.swift
+│   │   ├── Production.swift
+│   │   └── Quote.swift
+│   ├── Preview Content
+│   │   ├── MockData.swift
+│   │   └── Preview Assets.xcassets
+│   │       └── Contents.json
+│   └── Screens
+│       ├── Character
+│       │   └── Views
+│       │       └── CharacterView.swift
+│       ├── ContentView.swift
+│       └── QuoteEpisode
+│           ├── Subviews
+│           │   ├── EpisodeView.swift
+│           │   └── QuoteView.swift
+│           ├── ViewModels
+│           │   └── QuoteEpisodeViewModel.swift
+│           └── Views
+│               └── QuoteEpisodeView.swift
+└── BBQuotesTests
+    ├── Clients
+    │   ├── APIClientIntegrationTests.swift
+    │   └── APIClientTests.swift
+    ├── Models
+    │   ├── EpisodeTests.swift
+    │   └── ProductionTests.swift
+    └── Screens
+        └── QuoteEpisode
+            └── ViewModels
+                └── QuoteViewModelTests.swift
 ```
 
 ## Packages
