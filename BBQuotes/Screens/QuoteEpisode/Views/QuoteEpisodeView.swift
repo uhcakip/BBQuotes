@@ -109,7 +109,12 @@ struct QuoteEpisodeView: View {
     }
 }
 
-#Preview {
-    QuoteEpisodeView(production: .breakingBad, viewModel: .preview)
+#Preview("Quote") {
+    QuoteEpisodeView(production: .breakingBad, viewModel: .previewQuote)
+        .preferredColorScheme(.dark)
+}
+
+#Preview("Episode") {
+    QuoteEpisodeView(production: .breakingBad, viewModel: .previewEpisode)
         .preferredColorScheme(.dark)
 }

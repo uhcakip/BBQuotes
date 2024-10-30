@@ -17,14 +17,26 @@ import Foundation
     }
 
     private let client: APIClientProtocol
-    var quote: Quote?
-    var character: Character?
-    var episode: Episode?
-    var fetchStatus = DataFetchStatus.idle
-    private var isInitialLoad = true
+    private(set) var quote: Quote?
+    private(set) var character: Character?
+    private(set) var episode: Episode?
+    private(set) var fetchStatus: DataFetchStatus
+    private var isInitialLoad: Bool
 
-    init(client: APIClientProtocol = APIClient()) {
+    init(
+        client: APIClientProtocol = APIClient(),
+        quote: Quote? = nil,
+        character: Character? = nil,
+        episode: Episode? = nil,
+        fetchStatus: DataFetchStatus = .idle,
+        isInitialLoad: Bool = true
+    ) {
         self.client = client
+        self.quote = quote
+        self.character = character
+        self.episode = episode
+        self.fetchStatus = fetchStatus
+        self.isInitialLoad = isInitialLoad
     }
 
     func shouldInitialLoad() -> Bool {
