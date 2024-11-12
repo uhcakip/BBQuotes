@@ -59,10 +59,10 @@ struct QuoteEpisodeView: View {
                             ProgressView()
                         case .successQuote:
                             QuoteView(
+                                size: geo.size,
                                 quote: viewModel.quote,
                                 character: viewModel.character,
                                 production: production,
-                                geo: geo,
                                 showCharacterView: $showCharacterView
                             )
                         case .successEpisode:

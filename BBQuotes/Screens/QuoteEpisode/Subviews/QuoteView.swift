@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct QuoteView: View {
+    let size: CGSize
     let quote: Quote?
     let character: Character?
     let production: Production
-    let geo: GeometryProxy
     @Binding var showCharacterView: Bool
 
     var body: some View {
@@ -31,7 +31,7 @@ struct QuoteView: View {
                     } placeholder: {
                         ProgressView()
                     }
-                    .frame(width: geo.size.width / 1.1, height: geo.size.height / 1.8)
+                    .frame(width: size.width / 1.1, height: size.height / 1.8)
 
                     Text(character.name)
                         .foregroundStyle(.white)
@@ -39,7 +39,7 @@ struct QuoteView: View {
                         .frame(maxWidth: .infinity)
                         .background(.ultraThinMaterial)
                 }
-                .frame(width: geo.size.width / 1.1, height: geo.size.height / 1.8)
+                .frame(width: size.width / 1.1, height: size.height / 1.8)
                 .clipShape(.rect(cornerRadius: 50))
                 .onTapGesture {
                     showCharacterView = true
@@ -53,12 +53,12 @@ struct QuoteView: View {
 }
 
 #Preview {
-    GeometryReader { geo in
+    GeometryReader {
         QuoteView(
+            size: $0.size,
             quote: Quote.mock,
             character: Character.mock,
             production: .breakingBad,
-            geo: geo,
             showCharacterView: .constant(false)
         )
     }
