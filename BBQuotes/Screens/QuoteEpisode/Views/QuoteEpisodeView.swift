@@ -21,7 +21,7 @@ struct QuoteEpisodeView: View {
 
     // MARK: - Views
 
-    private func backgroundImage(geoSize size: CGSize) -> some View {
+    private func backgroundImage(size: CGSize) -> some View {
         Image(production.backgroundImageName)
             .resizable()
             .frame(width: size.width * 2.7, height: size.height * 1.2)
@@ -46,7 +46,7 @@ struct QuoteEpisodeView: View {
     var body: some View {
         GeometryReader { geo in
             ZStack {
-                backgroundImage(geoSize: geo.size)
+                backgroundImage(size: geo.size)
 
                 VStack {
                     VStack {
